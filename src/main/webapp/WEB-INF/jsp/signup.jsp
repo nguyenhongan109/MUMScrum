@@ -1,3 +1,4 @@
+<div style="width: 80%;overflow-x: hidden;overflow-y: scroll">
 <c:if test="${not empty message}">
     <div class="message green">${message}</div>
 </c:if>
@@ -102,4 +103,4 @@
 
     </fieldset>
 </form:form>
-
+</div>
