@@ -1,7 +1,9 @@
-<div style="width: 80%;height:70%; overflow-x: hidden;overflow-y: scroll">
+<%@ include file="/WEB-INF/jsp/common/taglib.jsp" %>
+
 <c:if test="${not empty message}">
     <div class="message green">${message}</div>
 </c:if>
+<div style="width: 80%">
 <form:form id="myForm" method="post"
            class="bs-example form-horizontal" commandName="student">
     <fieldset>
@@ -104,3 +106,4 @@
     </fieldset>
 </form:form>
 </div>
+
