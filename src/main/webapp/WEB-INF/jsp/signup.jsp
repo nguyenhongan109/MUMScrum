@@ -1,4 +1,4 @@
-<div style="width: 80%;overflow-x: hidden;overflow-y: scroll">
+<div style="width: 80%;height:70%; overflow-x: hidden;overflow-y: scroll">
 <c:if test="${not empty message}">
     <div class="message green">${message}</div>
 </c:if>
