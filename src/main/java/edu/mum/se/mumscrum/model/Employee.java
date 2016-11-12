@@ -1,6 +1,7 @@
 package edu.mum.se.mumscrum.model;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ import javax.validation.constraints.Size;
 public class Employee {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer eid;
     @NotEmpty
     @Size(min=4, max=20)
     private String firstName;
@@ -27,17 +28,22 @@ public class Employee {
     @Email
     private String email;
     @NotEmpty(message = "Please enter your password.")
-    @Size(min=5, message="Password must be at least 5 characters.")
+    @Size(min=5,max = 20, message="Password must be at least 5 characters.")
     private String password;
+    @NotBlank(message = "Please select a role!")
     private String role;
   //  private String roleDesc;
 
-    public int getId() {
-        return id;
+    public boolean isNew() {
+        return (this.eid == null);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Integer geteId() {
+        return eid;
+    }
+
+    public void seteId(Integer eid) {
+        this.eid = eid;
     }
 
     public String getFirstName() {
@@ -103,7 +109,7 @@ public class Employee {
 
         Employee employee = (Employee) o;
 
-        if (id != employee.id) return false;
+        if (eid != employee.eid) return false;
         if (role != employee.role) return false;
         if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) return false;
         if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) return false;
@@ -115,7 +121,7 @@ public class Employee {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = eid;
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);

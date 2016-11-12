@@ -1,27 +1,34 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ include file="/WEB-INF/jsp/common/taglib.jsp" %>
 <c:if test="${not empty message}">
-    <div class="message green">${message}</div>
+    <div cssClass="error">${message}</div>
 </c:if>
+<c:choose>
+    <c:when test="${employee['new']}">
+        <legend>New Employee Form</legend>
+    </c:when>
+    <c:otherwise>
+        <legend>Update Employee Form</legend>
+    </c:otherwise>
+</c:choose>
 <form:form id="myForm" method="post"
-           class="bs-example form-horizontal" commandName="employee">
+           class="bs-example form-horizontal"  commandName="employee">
     <fieldset>
+
         <legend>Employee Form</legend>
 
         <div class="form-group">
-            <label for="roleInput" class="col-lg-3 control-label">Role
-            </label>
+            <label for="role" class="col-lg-3 control-label">Role</label>
             <div class="col-lg-9">
-                <form:select path="roleInput">
-                    <form:option value="NONE" label="--- Select ---" />
+                <form:select path="role">
+                    <form:option value="" label="--- Select ---" />
                     <form:options items="${roleList}" />
                 </form:select>
-                <form:errors path="roleInput" cssClass="error"/>
+                <form:errors path="role" cssClass="error"/>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="firstNameInput" class="col-lg-3 control-label">First
-                Name</label>
+            <label for="firstNameInput" class="col-lg-3 control-label">First Name</label>
             <div class="col-lg-9">
                 <form:input type="text" class="form-control" path="firstName"
                             id="firstNameInput" placeholder="First Name"/>
@@ -30,8 +37,7 @@
         </div>
 
         <div class="form-group">
-            <label for="lastNameInput" class="col-lg-3 control-label">Last
-                Name</label>
+            <label for="lastNameInput" class="col-lg-3 control-label">Last Name</label>
             <div class="col-lg-9">
                 <form:input type="text" class="form-control" path="lastName"
                             id="lastNameInput" placeholder="Last Name"/>
@@ -40,13 +46,12 @@
         </div>
 
         <div class="form-group">
-            <label for="emailAddressInput" class="col-lg-3 control-label">Email
-                Address</label>
+            <label for="emailInput" class="col-lg-3 control-label">Email Address</label>
             <div class="col-lg-9">
-                <form:input type="text" class="form-control"
-                            path="emailAddress" id="emailAddressInput"
+                <form:input type="text" class="form-control" path="email"
+                            id="emailInput"
                             placeholder="Email Address"/>
-                <form:errors path="emailAddress" cssClass="error"/>
+                <form:errors path="email" cssClass="error"/>
             </div>
         </div>
 
@@ -71,7 +76,7 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"
                                     aria-hidden="true">&times;</button>
-                            <h3>Signup Form Submission</h3>
+                            <h3>Employee Form Submission</h3>
                         </div>
                         <div class="modal-body">
                             <p>Are you sure you want to do this?</p>

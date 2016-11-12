@@ -19,6 +19,18 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
 	</definition>
 
+	<definition name="admin" extends="baseLayout">
+		<put-attribute name="menu" value="/WEB-INF/jsp/common/menu.jsp"/>
+		<put-attribute name="head" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/success.jsp" />
+	</definition>
+
+	<definition name="employees" extends="baseLayout">
+		<put-attribute name="menu" value="/WEB-INF/jsp/common/menu.jsp"/>
+		<put-attribute name="head" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/EmployeeList.jsp" />
+	</definition>
+
 
 	<definition name="success" extends="baseLayout">
 

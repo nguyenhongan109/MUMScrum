@@ -3,6 +3,7 @@ package edu.mum.se.mumscrum.controller;
 import edu.mum.se.mumscrum.model.Employee;
 import edu.mum.se.mumscrum.model.EmployeeLogin;
 import edu.mum.se.mumscrum.service.EmployeeService;
+import edu.mum.se.mumscrum.utilities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +40,9 @@ public class LoginController {
         } else {
             Employee employee = employeeService.findByLogin(employeeLogin.getEmail(),employeeLogin.getPassword());
             if (employee!=null) {
-                session.setAttribute("employee",employeeLogin);
+                session.setAttribute("employee",employee);
+                if(Role.ADMIN.name().equals(employee.getRole()))
+                    return "redirect:/admin";
                 return "success";
             } else {
                 return "failure";
