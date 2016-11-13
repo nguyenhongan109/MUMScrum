@@ -45,7 +45,6 @@
     <tiles:insertAttribute name="head"/>
 </div>
 
-
 <div class="col-lg-6 col-lg-offset-3" >
     <div class="well">
         <div class="container">
@@ -55,8 +54,7 @@
                 </div>
             </div>
         </div>
-    </div>
+   </div>
 </div>
-
 </body>
 </html>
