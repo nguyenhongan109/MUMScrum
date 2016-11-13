@@ -42,7 +42,7 @@ public class LoginController {
             if (employee!=null) {
                 session.setAttribute("employee",employee);
                 if(Role.ADMIN.name().equals(employee.getRole()))
-                    return "redirect:/admin";
+                    return "redirect:/employeelist";
                 return "success";
             } else {
                 return "failure";

@@ -15,9 +15,11 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="employee")
 public class Employee {
+
+
     @Id
     @GeneratedValue
-    private Integer eid;
+    private int eid;
     @NotEmpty
     @Size(min=4, max=20)
     private String firstName;
@@ -34,15 +36,11 @@ public class Employee {
     private String role;
   //  private String roleDesc;
 
-    public boolean isNew() {
-        return (this.eid == null);
-    }
-
-    public Integer geteId() {
+    public int getEid() {
         return eid;
     }
 
-    public void seteId(Integer eid) {
+    public void setEid(int eid) {
         this.eid = eid;
     }
 

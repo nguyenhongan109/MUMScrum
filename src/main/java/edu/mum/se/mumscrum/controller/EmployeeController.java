@@ -2,6 +2,7 @@ package edu.mum.se.mumscrum.controller;
 
 import edu.mum.se.mumscrum.model.Employee;
 import edu.mum.se.mumscrum.model.EmployeeLogin;
+import edu.mum.se.mumscrum.model.HiddenValue;
 import edu.mum.se.mumscrum.service.EmployeeService;
 import edu.mum.se.mumscrum.utilities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.EnumSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,7 +30,7 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
-
+    HiddenValue hiddenValue=new HiddenValue();
     private void roles(Model model)
     {
         Map<String,String> roleH = new LinkedHashMap<String,String>();
@@ -38,12 +40,32 @@ public class EmployeeController {
         model.addAttribute("roleList",roleH);
     }
 
-    @RequestMapping(value="/employees", method= RequestMethod.GET)
-    public String adminList(Model model) {
+    @RequestMapping(value="/employeelist", method= RequestMethod.GET)
+    public String employeeList(Model model) {
 
+       model.addAttribute("hb",hiddenValue);
         model.addAttribute("employees",employeeService.getAllEmployee());
-        return "employees";
+        return "employeelist";
     }
+
+
+
+    @RequestMapping(value="/employeeUpdate", method= RequestMethod.POST)
+    public String employeeUpdate(Model model) {
+
+        String id=hiddenValue.getHiddenID();
+        Employee employee=new Employee();
+
+        if(id!=null)
+            employee=employeeService.findByID(id);
+        else
+            roles(model);
+
+        model.addAttribute("employee",employee);
+        return "redirect:/employee";
+    }
+
+    /*
 
     @RequestMapping(value="/admin", method= RequestMethod.GET)
     public String adminPage(HttpServletRequest request , Model model) {
@@ -74,6 +96,7 @@ public class EmployeeController {
         model.addAttribute("message", "Saved employee details");
         return "adminlist";
     }
+    */
 
 
 
