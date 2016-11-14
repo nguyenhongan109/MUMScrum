@@ -3,12 +3,14 @@ package edu.mum.se.mumscrum.service;
 import edu.mum.se.mumscrum.model.ProductBackLog;
 import edu.mum.se.mumscrum.repository.ProductBackLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by tony on 11/14/16.
  */
+@Service("productBackLogService")
 public class ProductBackLogServiceImpl implements ProductBackLogService {
     @Autowired
     private ProductBackLogRepository productBackLogRepository;

@@ -42,8 +42,12 @@ public class LoginController {
             Employee employee = employeeService.findByLogin(employeeLogin.getEmail(),employeeLogin.getPassword());
             if (employee!=null) {
                 session.setAttribute("employee",employee);
+
                 if(Role.ADMIN.name().equals(employee.getRole()))
                     return "redirect:/admin";
+                if(Role.POWNER.name().equals(employee.getRole()))
+                    return "redirect:/productBackLogList";
+
                 return "success";
             } else {
                 return "failure";

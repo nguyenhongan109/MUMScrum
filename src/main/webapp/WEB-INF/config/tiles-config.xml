@@ -35,5 +35,13 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/HRAdmin/Employee.jsp" />
 	</definition>
 
-
+	<definition name="productBackLogList" extends="baseLayout">
+		<put-attribute name="menu" value="/WEB-INF/jsp/common/menu.jsp"/>
+		<put-attribute name="head" value="/WEB-INF/jsp/ProductBackLog/productBackLogList.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+	<definition name="productBackLog" extends="baseLayout">
+		<put-attribute name="head" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/ProductBackLog/productBackLog.jsp" />
+	</definition>
 </tiles-definitions>
