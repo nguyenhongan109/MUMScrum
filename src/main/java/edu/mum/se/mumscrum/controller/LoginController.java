@@ -29,6 +29,7 @@ public class LoginController {
 
    @RequestMapping(value="/login", method= RequestMethod.GET)
     public String loginPage(Model model) {
+       model.addAttribute("loginPage",true);
        model.addAttribute("employeeLogin", new EmployeeLogin());
        return "login";
     }

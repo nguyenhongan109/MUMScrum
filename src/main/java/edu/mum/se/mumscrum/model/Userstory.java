@@ -1,15 +1,13 @@
 package edu.mum.se.mumscrum.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 /**
  * Created by Min Gaung on 14/11/2016.
  */
 @Entity
+@Table(name="userstory")
 public class Userstory {
     private int uid;
     private String name;

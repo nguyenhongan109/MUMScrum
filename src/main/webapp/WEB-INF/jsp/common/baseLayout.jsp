@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,17 +26,25 @@
             padding: 8px;
             margin: 16px;
         }
+
+        div:empty {
+            display: none;
+        }
     </style>
+
 
 </head>
 <body>
-<script src="../jquery-1.8.3.js">
+<script src="../jquery-1.8.3.js"></script>
 
-</script>
-
-<script src="../bootstrap/js/bootstrap.js">
-
-</script>
+<script src="../bootstrap/js/bootstrap.js"></script>
+<div>
+    <%--
+    <c:if test="${empty sessionScope.employee.role && loginPage!=true}">
+        <c:redirect url="/login"></c:redirect>
+    </c:if>
+    --%>
+</div>
 <div>
     <tiles:insertAttribute name="menu"/>
 </div>
@@ -45,18 +53,14 @@
     <tiles:insertAttribute name="head"/>
 </div>
 
-
-<div class="col-lg-6 col-lg-offset-3" >
-    <div class="well">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <tiles:insertAttribute name="body"/>
-                </div>
-            </div>
-        </div>
-    </div>
+<div style="width: 99%;overflow-x: hidden">
+    <tiles:insertAttribute name="body"/>
 </div>
 
 </body>
 </html>
+<script>
+    $(document).ready(function () {
+        $('.${mySelectedClass}').addClass('active');
+    });
+</script>

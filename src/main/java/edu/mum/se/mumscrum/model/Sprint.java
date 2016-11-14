@@ -1,15 +1,13 @@
 package edu.mum.se.mumscrum.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 /**
  * Created by Min Gaung on 14/11/2016.
  */
 @Entity
+@Table(name="sprint")
 public class Sprint {
     private int sid;
     private int uid;
@@ -18,7 +16,7 @@ public class Sprint {
     private String description;
     private Date startDate;
     private Date endDate;
-    private Byte status;
+    private String status;
     private Date assignedDate;
     private int assignedTo;
 
@@ -94,11 +92,11 @@ public class Sprint {
 
     @Basic
     @Column(name = "status")
-    public Byte getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

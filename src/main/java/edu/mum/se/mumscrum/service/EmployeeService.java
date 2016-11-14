@@ -11,6 +11,7 @@ public interface EmployeeService {
     Employee findByLogin(String email, String password);
     boolean findByEmail(String email);
     List<Employee> getAllEmployee();
-    Employee findByID(String eid);
-    Employee save(Employee employee);
+    Employee findByID(int id);
+    void save(Employee employee);
+    void delete(int id);
 }

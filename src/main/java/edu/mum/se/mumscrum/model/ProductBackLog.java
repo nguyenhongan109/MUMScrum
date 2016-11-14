@@ -1,19 +1,17 @@
 package edu.mum.se.mumscrum.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Min Gaung on 14/11/2016.
  */
 @Entity
+@Table(name="productBackLog")
 public class ProductBackLog {
     private int pid;
     private String name;
     private String description;
-    private Boolean status;
+    private String status;
 
     @Id
     @Column(name = "pid")
@@ -47,11 +45,11 @@ public class ProductBackLog {
 
     @Basic
     @Column(name = "status")
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
