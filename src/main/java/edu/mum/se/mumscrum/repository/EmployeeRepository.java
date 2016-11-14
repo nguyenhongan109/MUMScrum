@@ -2,12 +2,8 @@ package edu.mum.se.mumscrum.repository;
 
 import edu.mum.se.mumscrum.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * Created by Min Gaung on 11/11/2016.
