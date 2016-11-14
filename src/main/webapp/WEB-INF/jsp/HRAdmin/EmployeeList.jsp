@@ -1,4 +1,5 @@
 <%@ include file="/WEB-INF/jsp/common/taglib.jsp" %>
+<spring:url value="/employee" var="ActionUrl" />
 
 <div class="container">
     <c:if test="${not empty message}">
@@ -9,16 +10,15 @@
             <strong>${message}</strong>
         </div>
     </c:if>
-    <h1>All User Stories</h1>
+    <h1>All Employees</h1>
     <table class="table table-striped">
         <thead>
         <tr>
             <th>#ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Estimated Effort</th>
-            <th>Actual Effort</th>
-            <th>Status</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Role</th>
         </tr>
         </thead>
         <c:forEach var="emp" items="${employees}">
