@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository("productBackLogRepository")
 public interface ProductBackLogRepository extends JpaRepository<ProductBackLog, Long> {
     ProductBackLog findByPid(int pid);
+    ProductBackLog findByName(String name);
     @Transactional
     Long deleteByPid(int pid);
 }

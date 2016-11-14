@@ -16,6 +16,13 @@ public class ProductBackLogServiceImpl implements ProductBackLogService {
     private ProductBackLogRepository productBackLogRepository;
 
     @Override
+    public boolean findByName(String name) {
+        if (productBackLogRepository.findByName(name) != null)
+            return true;
+        return false;
+    }
+
+    @Override
     public ProductBackLog findByPid(int pid) {
         return productBackLogRepository.findByPid(pid);
     }

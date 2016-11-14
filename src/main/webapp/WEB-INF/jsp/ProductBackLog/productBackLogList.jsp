@@ -11,7 +11,7 @@
         </div>
     </c:if>
     <h1>All Product BackLogs</h1>
-    <button class="btn btn-primary">Create new ProductBacklog</button>
+    <button class="btn btn-primary" onclick="location.href='/productBackLog'">Create new</button>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -19,6 +19,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Status</th>
+            <th></th>
         </tr>
         </thead>
         <c:forEach var="pbl" items="${productBackLogList}">
@@ -28,6 +29,12 @@
                 <td>${pbl.name}</td>
                 <td>${pbl.description}</td>
                 <td>${pbl.status}</td>
+                <td>
+                    <spring:url value="/productBackLogList/${pbl.pid}" var="updateUrl"/>
+                    <spring:url value="/productBackLogList/${pbl.pid}/delete" var="deleteUrl"/>
+                    <button class="btn btn-info" onclick="location.href='${updateUrl}'">Update</button>
+                    <button class="btn btn-primary" onclick="location.href='${deleteUrl}'">Delete</button>
+                </td>
             </tr>
         </c:forEach>
     </table>

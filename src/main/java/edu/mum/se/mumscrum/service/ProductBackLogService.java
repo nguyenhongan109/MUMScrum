@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface ProductBackLogService {
     ProductBackLog findByPid(int pid);
+    boolean findByName(String name);
     List<ProductBackLog> getAllProductBackLog();
     void save(ProductBackLog productBackLog);
     void deleteByPid(int pid);
