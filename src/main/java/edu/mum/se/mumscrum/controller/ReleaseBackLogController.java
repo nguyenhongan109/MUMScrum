@@ -1,5 +1,6 @@
 package edu.mum.se.mumscrum.controller;
 
+import edu.mum.se.mumscrum.model.Employee;
 import edu.mum.se.mumscrum.model.ReleaseBackLog;
 import edu.mum.se.mumscrum.service.ReleaseBackLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 
 /**
@@ -33,9 +35,14 @@ public class ReleaseBackLogController {
 
     @RequestMapping(value = "/releaseBackLog/{pid}", method = RequestMethod.GET)
     public String releaseBackLogPage(@PathVariable("pid") int pid,
-                                     Model model){
+                                     Model model,
+                                     HttpSession session){
         ReleaseBackLog releaseBackLog = new ReleaseBackLog();
         releaseBackLog.setPid(pid);
+
+        Employee e = (Employee)session.getAttribute("employee");
+        releaseBackLog.setUid(e.getEid());
+
         releaseBackLog.setReleaseDate(new Date(2016,11,15));
         model.addAttribute("currentProductBackLog", pid);
         model.addAttribute("releaseBackLog", releaseBackLog);
@@ -47,6 +54,7 @@ public class ReleaseBackLogController {
                                      @PathVariable("rid") int rid,
                                      Model model){
         ReleaseBackLog releaseBackLog = releaseBackLogService.findByRid(rid);
+        model.addAttribute("currentProductBackLog", pid);
         model.addAttribute("releaseBackLog", releaseBackLog);
         return "releaseBackLog";
     }
