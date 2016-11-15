@@ -11,7 +11,7 @@
         </div>
     </c:if>
     <h1>All Product BackLogs</h1>
-    <button class="btn btn-primary" onclick="location.href='/productBackLog'">Create new</button>
+    <button class="btn btn-link" onclick="location.href='/productBackLog'">Create new</button>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -31,9 +31,11 @@
                 <td>${pbl.status}</td>
                 <td>
                     <spring:url value="/productBackLog/${pbl.pid}" var="updateUrl"/>
-                    <button class="btn btn-info" onclick="location.href='${updateUrl}'">Update</button>
+                    <button class="btn btn-link" onclick="location.href='${updateUrl}'">Update</button>
                     <spring:url value="/productBackLog/${pbl.pid}/delete" var="deleteUrl"/>
-                    <button class="btn btn-primary" onclick="location.href='${deleteUrl}'">Delete</button>
+                    <button class="btn btn-link" onclick="location.href='${deleteUrl}'">Delete</button>
+                    <spring:url value="/releaseBackLogList/${pbl.pid}" var="releaseURL"/>
+                    <button class="btn btn-link" onclick="location.href='${releaseURL}'">Release</button>
                 </td>
             </tr>
         </c:forEach>

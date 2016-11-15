@@ -28,9 +28,11 @@
                     <li><a href="/login">Logout</a></li>
                 </c:when>
                 <c:when test="${sessionScope.employee.role == 'POWNER'}">
-                    <li><a href="/productBackLogList">Product BackLog</a></li>
+                    <li><a href="/productBackLogList">Home</a></li>
+                    <!--
                     <li><a>|</a></li>
                     <li><a href="/releaseBackLog">Release BackLog</a></li>
+                    -->
                     <li><a>|</a></li>
                     <li><a href="/login">Logout</a></li>
                 </c:when>
