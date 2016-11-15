@@ -30,9 +30,9 @@
                 <td>${pbl.description}</td>
                 <td>${pbl.status}</td>
                 <td>
-                    <spring:url value="/productBackLogList/${pbl.pid}" var="updateUrl"/>
-                    <spring:url value="/productBackLogList/${pbl.pid}/delete" var="deleteUrl"/>
+                    <spring:url value="/productBackLog/${pbl.pid}" var="updateUrl"/>
                     <button class="btn btn-info" onclick="location.href='${updateUrl}'">Update</button>
+                    <spring:url value="/productBackLog/${pbl.pid}/delete" var="deleteUrl"/>
                     <button class="btn btn-primary" onclick="location.href='${deleteUrl}'">Delete</button>
                 </td>
             </tr>

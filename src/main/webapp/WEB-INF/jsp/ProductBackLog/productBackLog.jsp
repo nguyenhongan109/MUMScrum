@@ -19,12 +19,12 @@
                                 <div class="col-lg-9">
                                     <form:input type="text" class="form-control" path="name"
                                                 id="nameInput" placeholder="Name"/>
-                                    <form:errors path="name " cssClass="error"/>
+                                    <form:errors path="name" cssClass="error"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="descriptionInput" class="col-lg-3 control-label">Last Name</label>
+                                <label for="descriptionInput" class="col-lg-3 control-label">Description</label>
                                 <div class="col-lg-9">
                                     <form:input type="text" class="form-control" path="description"
                                                 id="descriptionInput" placeholder="Description"/>
@@ -46,9 +46,9 @@
 
 
                             <div class="col-lg-9 col-lg-offset-3">
-                                <spring:url value="/productBackLog" var="pblURL"/>
+                                <spring:url value="/productBackLogList" var="pblURL"/>
 
-                                <button type="reset" class="btn btn-default" onclick="location.href='${pblURL}'"  formnovalidate>Cancel</button>
+                                <button type="reset" class="btn btn-default" onclick="location.href='${pblURL}'" formnovalidate>Cancel</button>
 
                                 <c:choose>
                                     <c:when test="${productBackLog.pid != 0}">

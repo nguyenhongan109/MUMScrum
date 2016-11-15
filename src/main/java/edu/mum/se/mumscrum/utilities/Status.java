@@ -5,7 +5,8 @@ package edu.mum.se.mumscrum.utilities;
  */
 public enum Status {
     NEW("New"),
-    INPROGRESS("In Progress");
+    INPROGRESS("In Progress"),
+    COMPLETED("Completed");
 
 
     private String desc;

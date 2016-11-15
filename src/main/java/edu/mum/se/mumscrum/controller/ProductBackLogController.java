@@ -40,9 +40,17 @@ public class ProductBackLogController {
         model.addAttribute("statusList", statusH);
     }
 
+    @RequestMapping(value = "/productBackLog/{id}", method = RequestMethod.GET)
+    public String updateProductBackLog(@PathVariable("id") int id, Model model){
+        ProductBackLog productBackLog = new ProductBackLog();
+        status(model);
+        productBackLog = productBackLogService.findByPid(id);
+        model.addAttribute("productBackLog", productBackLog);
+        return "productBackLog";
+    }
+
     @RequestMapping(value = "/productBackLog", method = RequestMethod.GET)
     public String productBackLogPage(Model model) {
-
         status(model);
         model.addAttribute("productBackLog",new ProductBackLog());
         return "productBackLog";
@@ -71,7 +79,7 @@ public class ProductBackLogController {
     }
 
     // Delete
-    @RequestMapping(value = "/productBackLogList/{id}/delete")
+    @RequestMapping(value = "/productBackLog/{id}/delete")
     public String deleteByPid(@PathVariable("id") int id){
         productBackLogService.deleteByPid(id);
         return "redirect:/productBackLogList";
