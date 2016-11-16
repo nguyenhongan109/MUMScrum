@@ -1,7 +1,7 @@
 package edu.mum.se.mumscrum.controller;
 
 import edu.mum.se.mumscrum.model.Userstory;
-import edu.mum.se.mumscrum.service.USService;
+import edu.mum.se.mumscrum.service.UserStoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -19,19 +19,19 @@ import org.springframework.validation.BindingResult;
 public class EffortController {
 
     @Autowired
-    USService usService;
+    UserStoryService usService;
 
     //show a list of Estimate
     @RequestMapping(value ="/effortList", method = RequestMethod.GET)
     public String USList(Model model){
-        model.addAttribute("USList", usService.getAllUS());
+        model.addAttribute("USList", usService.getAllUserStory());
         return "effortList";
     }
 
     //retrieve 1 userStory
     @RequestMapping(value = "/estimateEffort/{id}", method = RequestMethod.GET)
     public String retrieveUserStory(Model model, @PathVariable("id") int id){
-        model.addAttribute("userStory", usService.retrieveUS(id));
+        model.addAttribute("userStory", usService.findByID(id));
         return "estimateEffort";
     }
 
@@ -47,9 +47,23 @@ public class EffortController {
     public String retrieveUpdateEffort(@ModelAttribute("userStory") @Validated Userstory userStory
             , @PathVariable("id") int id, Model model){
 
-        model.addAttribute("userStory", usService.retrieveUS(id));
+        model.addAttribute("userStory", usService.findByID(id));
         return "updateEffort";
     }
+
+    //update Effort
+    @RequestMapping(value ="/updateEffort", method = RequestMethod.POST)
+    public String updateEffort(@ModelAttribute("userStory") @Validated Userstory userStory,
+                                    BindingResult result, Model model){
+
+
+        int oldEstEffort= usService.findByID(userStory.getUid()).getActualEffort();
+        userStory.setActualEffort(userStory.getActualEffort()+oldEstEffort);
+        usService.save(userStory);
+        return "redirect:/effortList";
+    }
+
+
 //    @RequestMapping(value ="/updateEffort/${id}", method = RequestMethod.POST)
 //    public String updateEstimateEffort(@ModelAttribute("userStory") @Validated Userstory userStory,
 //                                    BindingResult result, Model model){

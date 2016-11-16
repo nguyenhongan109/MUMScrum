@@ -4,17 +4,18 @@ import edu.mum.se.mumscrum.model.ProductBackLog;
 import edu.mum.se.mumscrum.model.Userstory;
 import edu.mum.se.mumscrum.service.ProductBackLogService;
 import edu.mum.se.mumscrum.service.UserStoryService;
+import edu.mum.se.mumscrum.utilities.Status;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by Min Gaung on 12/11/2016.
@@ -26,9 +27,26 @@ public class UserStoryController {
     private UserStoryService userStoryService;
     @Autowired
     private ProductBackLogService productBackLogService;
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat,false));
+
+    }
     @ModelAttribute("productBackLogs")
     public List<ProductBackLog> getAllProductBackLog() {
         return productBackLogService.getAllProductBackLog();
+    }
+    @ModelAttribute("statuslists")
+    private Map<String, String> status(Model model){
+        Map<String, String> statusH = new LinkedHashMap<String, String>();
+        for (Status status : EnumSet.allOf(Status.class)) {
+            statusH.put(status.name(), status.desc());
+        }
+        return statusH;
     }
     @RequestMapping(value = "/userstorylist", method = RequestMethod.GET)
     public String userStoryList(Model model) {
@@ -47,9 +65,9 @@ public class UserStoryController {
     }
 
     @RequestMapping(value = "/userstory", method = RequestMethod.GET)
-    public String UserStoryPage(Userstory userstory,Model model) {
+    public String UserStoryPage(Model model) {
 
-        model.addAttribute("userstory", userstory);
+        model.addAttribute("userstory", new Userstory());
         return "userstory";
     }
 

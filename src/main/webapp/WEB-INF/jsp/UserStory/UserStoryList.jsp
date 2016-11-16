@@ -27,13 +27,13 @@
 
         <c:forEach var="us" items="${userstories}">
             <tr>
-
                 <td>${us.uid}</td>
                 <td>${us.name}</td>
                 <td>${us.description}</td>
                 <td>${us.estimatedEffort}</td>
                 <td>${us.actualEffort}</td>
                 <td>${us.completDate}</td>
+                <td>${us.assignedDate}</td>
                 <td>${us.status}</td>
                 <td>
                     <spring:url value="/userstoryupdate/${us.uid}" var="updateUrl"/>
