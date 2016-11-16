@@ -1,48 +1,53 @@
 <%@ include file="/WEB-INF/jsp/common/taglib.jsp" %>
+
 <div class="col-lg-6 col-lg-offset-3">
     <div class="well">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <c:if test="${not empty message}">
-                        < cssClass="error">${message}</>
-                    </c:if>
-                    <spring:url value="/employee" var="ActionUrl"/>
-                    <form:form id="myForm" method="post" action="${ActionUrl}"
-                               class="bs-example form-horizontal" commandName="employee">
+                    <form:form id="myForm" method="post" action="/userstory"
+                               class="bs-example form-horizontal" commandName="userstory">
                         <fieldset>
-
-                            <legend>Employee Form</legend>
-                            <form:hidden path="eid"/>
+                            <legend>UserStory Form</legend>
+                            <form:hidden path="uid"/>
                             <div class="form-group">
-                                <label for="role" class="col-lg-3 control-label">Role</label>
+                                <label for="nameInput" class="col-lg-3 control-label">Name</label>
                                 <div class="col-lg-9">
-                                    <form:select path="role">
-                                        <form:option value="" label="--- Select ---"/>
-                                        <form:options items="${roleList}"/>
+                                    <form:input type="text" class="form-control" path="name"
+                                                id="nameInput" placeholder="Name"/>
+                                    <form:errors path="name" cssClass="error"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descriptionInput" class="col-lg-3 control-label">Description</label>
+                                <div class="col-lg-9">
+                                    <form:input type="text" class="form-control" path="description"
+                                                id="descriptionInput" placeholder="Description"/>
+                                    <form:errors path="description" cssClass="error"/>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label" for="productBackLog">Product Back Log:</label>
+                                <div class="col-lg-9">
+                                    <form:select path="productBackLog.pid" items="${productBackLogs}" itemValue="pid" id="PFilter"
+                                                 itemLabel="name" cssClass="form-control" />
+                                    <form:errors path="productBackLog.pid" cssClass="error"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-lg-3" for="release">Release:</label>
+                                <div class="col-lg-9">
+                                    <form:select id="releaseFilter" path="release.rid" cssClass="form-control">
+                                        <form:options items="${releases}" itemLabel="name" itemValue="rid"/>
                                     </form:select>
-                                    <form:errors path="role" cssClass="error"/>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="firstNameInput" class="col-lg-3 control-label">First Name</label>
-                                <div class="col-lg-9">
-                                    <form:input type="text" class="form-control" path="firstName"
-                                                id="firstNameInput" placeholder="First Name"/>
-                                    <form:errors path="firstName" cssClass="error"/>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="lastNameInput" class="col-lg-3 control-label">Last Name</label>
-                                <div class="col-lg-9">
-                                    <form:input type="text" class="form-control" path="lastName"
-                                                id="lastNameInput" placeholder="Last Name"/>
-                                    <form:errors path="lastName" cssClass="error"/>
-                                </div>
-                            </div>
-
+                            <input id="prodId" name="prodId" type="hidden" value="" />
+<%--
                             <div class="form-group">
                                 <label for="emailInput" class="col-lg-3 control-label">Email Address</label>
                                 <div class="col-lg-9">
@@ -107,7 +112,7 @@
                                 </div>
 
                             </div>
-
+--%>
                         </fieldset>
                     </form:form>
                 </div>
@@ -115,4 +120,52 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" charset="utf-8">
+
+    $(document).ready(function() {
+       UpdateSprint();
+        $('#PFilter').change(function()
+        {
+            UpdateSprint();
+        });
+
+        function UpdateSprint()
+        {
+            $("#prodId").val($('#PFilter').val());
+            var prodId = $("#prodId").val();
+            console.log("Pid: "+prodId);
+
+            var data = {
+                "prodId" : prodId
+            };
+
+            var url = "<c:url value='/release/'/>";
+            $.ajax({
+                type : "GET",
+                contentType : "application/json",
+                url : url + prodId,
+                data : JSON.stringify(data),
+                success : function(data) {
+                    var html = '<option value="">Not Selected (Optional)</option>';
+                    var len = data.length;
+                    for ( var i = 0; i < len; i++) {
+                        console.log(data[i].name);
+                        console.log(data[i].rid);
+                        html += '<option value="' + data[i].rid + '">'
+                                + data[i].name + '</option>';
+                    }
+                    html += '</option>';
+
+                    $('#releaseFilter').html(html);
+                },
+                error : function(xhr, status, exception) {
+                    console.log(xhr, status, exception);
+                },
+                done : function(e) {
+                    console.log("DONE");
+                }
+            });
+        }
+    });
+</script>
 

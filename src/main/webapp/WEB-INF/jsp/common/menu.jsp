@@ -1,10 +1,5 @@
 <%@ include file="/WEB-INF/jsp/common/taglib.jsp" %>
 <%@ page import="edu.mum.se.mumscrum.utilities.Role" %>
-<script>
-    $(document).ready(function () {
-        $('.${mySelectedClass}').addClass('active');
-    });
-</script>
 <div class="navbar navbar-default">
 
     <%--
@@ -17,6 +12,7 @@
                 class="icon-bar"></span>
         </button>
     </div>--%>
+
     <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav navbar-right">
             <c:choose>
@@ -24,6 +20,35 @@
                     <li><a href="/admin">Home</a></li>
                     <li><a>|</a></li>
                     <li><a href="/employee">New Employee</a></li>
+                    <li><a>|</a></li>
+                    <li><a href="http://localhost:8080/login">Logout</a></li>
+                </c:when>
+                <c:when test="${sessionScope.employee.role == 'POWNER'}">
+                    <li><a href="/userstorylist">Home</a></li>
+                    <li><a>|</a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">User Story<b
+                            class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="userstory">Create User Story</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/userstorylist">User Story List</a></li>
+                        </ul>
+                    </li>
+                    <li><a>|</a></li>
+                    <li><a href="/login">Logout</a></li>
+                </c:when>
+                <c:when test="${sessionScope.employee.role == 'SCRUMASTER'}">
+                    <li><a href="/admin">Home</a></li>
+                    <li><a>|</a></li>
+                    <li><a href="/login">Logout</a></li>
+                </c:when>
+                <c:when test="${sessionScope.employee.role == 'DEVELOPER'}">
+                    <li><a href="/admin">Home</a></li>
+                    <li><a>|</a></li>
+                    <li><a href="/login">Logout</a></li>
+                </c:when>
+                <c:when test="${sessionScope.employee.role == 'TESTER'}">
+                    <li><a href="/admin">Home</a></li>
                     <li><a>|</a></li>
                     <li><a href="/login">Logout</a></li>
                 </c:when>

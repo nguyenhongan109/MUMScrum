@@ -10,6 +10,7 @@
         </div>
     </c:if>
     <h1>All User Stories</h1>
+    <c:out value="${session.employee.role}"></c:out>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -18,31 +19,27 @@
             <th>Description</th>
             <th>Estimated Effort</th>
             <th>Actual Effort</th>
+            <th>Completed Date</th>
+            <th>Assigned Date</th>
             <th>Status</th>
         </tr>
         </thead>
-        <c:forEach var="emp" items="${employees}">
+
+        <c:forEach var="us" items="${userstories}">
             <tr>
 
-                <td>${emp.eid}</td>
-                <td>${emp.firstName}</td>
-                <td>${emp.lastName}</td>
-                <td>${emp.email}</td>
-                <td>${emp.role}</td>
+                <td>${us.uid}</td>
+                <td>${us.name}</td>
+                <td>${us.description}</td>
+                <td>${us.estimatedEffort}</td>
+                <td>${us.actualEffort}</td>
+                <td>${us.completDate}</td>
+                <td>${us.status}</td>
                 <td>
-                    <spring:url value="/admin/${emp.eid}" var="updateUrl"/>
-                    <spring:url value="/employee/${emp.eid}/delete" var="deleteUrl"/>
+                    <spring:url value="/userstoryupdate/${us.uid}" var="updateUrl"/>
+                    <spring:url value="/userstorydelete/${us.uid}" var="deleteUrl"/>
                     <button class="btn btn-info" onclick="location.href='${updateUrl}'">Update</button>
-                    <c:choose>
-                        <c:when test="${emp.email == 'admin@gmail.com'}">
-                            <button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button>
-                        </c:when>
-                        <c:otherwise>
-                            <button class="btn btn-primary" onclick="location.href='${deleteUrl}'">Delete</button>
-                        </c:otherwise>
-                    </c:choose>
-
-
+                    <button class="btn btn-primary" onclick="location.href='${deleteUrl}'">Delete</button>
                 </td>
             </tr>
         </c:forEach>

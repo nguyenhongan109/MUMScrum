@@ -12,6 +12,11 @@
     <link href="../datepicker/css/datepicker.css" rel="stylesheet"/>
     <link href="../assets/css/bootstrap-united.css" rel="stylesheet"/>
 
+    <script src="../js/jquery-1.11.3.js"
+            type="text/javascript"></script>
+    <script src="../js/jquery.validate.min.js"
+            type="text/javascript"></script>
+
     <style>
         .error {
             color: #ff0000;
@@ -35,9 +40,7 @@
 
 </head>
 <body>
-<script src="../jquery-1.8.3.js"></script>
 
-<script src="../bootstrap/js/bootstrap.js"></script>
 <div>
     <%--
     <c:if test="${empty sessionScope.employee.role && loginPage!=true}">
@@ -59,8 +62,3 @@
 
 </body>
 </html>
-<script>
-    $(document).ready(function () {
-        $('.${mySelectedClass}').addClass('active');
-    });
-</script>

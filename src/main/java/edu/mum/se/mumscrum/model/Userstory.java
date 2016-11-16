@@ -17,7 +17,10 @@ public class Userstory {
     private Date completDate;
     private String status;
     private Date assignedDate;
-
+    private ProductBackLog productBackLog;
+    private ReleaseBackLog release;
+   // private Set<ProductBackLog> productBackLogs = new HashSet<ProductBackLog>(0);
+   // private Set<ReleaseBackLog> releases = new HashSet<ReleaseBackLog>(0);
     @Id
     @Column(name = "uid")
     public int getUid() {
@@ -98,6 +101,27 @@ public class Userstory {
         this.assignedDate = assignedDate;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rid")
+    public ReleaseBackLog getRelease() {
+        return this.release;
+    }
+
+    public void setRelease(ReleaseBackLog release) {
+        this.release = release;
+    }
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pid")
+   // @JsonManagedReference
+    public ProductBackLog getProductBackLog() {
+        return this.productBackLog;
+    }
+
+    public void setProductBackLog(ProductBackLog productBackLog) {
+        this.productBackLog = productBackLog;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -134,4 +158,6 @@ public class Userstory {
         result = 31 * result + (assignedDate != null ? assignedDate.hashCode() : 0);
         return result;
     }
+
+
 }

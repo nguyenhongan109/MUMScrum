@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Created by tony on 11/14/16.
+ * Created by Min Gaung on 11/11/2016.
  */
 @Repository("productBackLogRepository")
 public interface ProductBackLogRepository extends JpaRepository<ProductBackLog, Long> {
@@ -14,4 +14,5 @@ public interface ProductBackLogRepository extends JpaRepository<ProductBackLog, 
     ProductBackLog findByName(String name);
     @Transactional
     Long deleteByPid(int pid);
+
 }

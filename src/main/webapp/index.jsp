@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 <%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:redirect url="/login" />
+<c:redirect url="/effortList" />
 =======
 <html>
 <head>
@@ -61,7 +61,7 @@
 
     <div></div>
 </div>
-<script src="jquery-1.8.3.js">
+<script src="js/jquery-1.8.3.js">
 </script>
 
 <script src="bootstrap/js/bootstrap.js">
