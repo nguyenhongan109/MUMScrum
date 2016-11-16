@@ -24,6 +24,8 @@
                     <li><a href="http://localhost:8080/login">Logout</a></li>
                 </c:when>
                 <c:when test="${sessionScope.employee.role == 'POWNER'}">
+                    <li><a href="/productBackLogList">Product Backlog</a></li>
+                    <li><a>|</a></li>
                     <li><a href="/userstorylist">Home</a></li>
                     <li><a>|</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">User Story<b
@@ -49,15 +51,6 @@
                 </c:when>
                 <c:when test="${sessionScope.employee.role == 'TESTER'}">
                     <li><a href="/admin">Home</a></li>
-                    <li><a>|</a></li>
-                    <li><a href="/login">Logout</a></li>
-                </c:when>
-                <c:when test="${sessionScope.employee.role == 'POWNER'}">
-                    <li><a href="/productBackLogList">Home</a></li>
-                    <!--
-                    <li><a>|</a></li>
-                    <li><a href="/releaseBackLog">Release BackLog</a></li>
-                    -->
                     <li><a>|</a></li>
                     <li><a href="/login">Logout</a></li>
                 </c:when>
