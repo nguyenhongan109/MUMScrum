@@ -11,8 +11,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
-                    <form:form id="estimateForm" method="post"
-                               class="bs-example form-horizontal" commandName="userStory">
+                    <form:form id="estimateForm" method="POST"
+                               class="bs-example form-horizontal" action="/updateEffort" commandName="userStory">
                         <fieldset>
                             <legend>Update Estimate Effort</legend>
                             <c:out value="${userStory.description}"></c:out>
@@ -23,8 +23,16 @@
                                                 id="estimation" placeholder="Estimation"/>
                                     <form:errors path="estimatedEffort" cssClass="error"/>
 
-                                    <button class="btn btn-primary">Estimate</button>
-                                  //show current date here then when click Update -> update Timelogs and Userstory
+                                    <button class="btn btn-primary">Update</button>
+
+
+                                    <spring:url value="/effortList" var="cancelUpdate"/>
+
+                                    <button type="reset" class="btn btn-default" onclick="location.href='${cancelUpdate}'"  formnovalidate>Cancel</button>
+
+
+
+                                    <c:out value="<%= new java.util.Date() %>"></c:out>
                                     <form:hidden path="uid"/>
                                     <form:hidden path="name"/>
                                     <form:hidden path="description"/>
