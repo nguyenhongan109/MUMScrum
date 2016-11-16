@@ -2,19 +2,24 @@ package edu.mum.se.mumscrum.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Min Gaung on 14/11/2016.
  */
 @Entity
-@Table(name="release")
-public class Release {
+@Table(name="releaseBackLog")
+public class ReleaseBackLog {
     private int rid;
     private int uid;
     private int pid;
     private String name;
     private String description;
     private Date releaseDate;
+    private Set<ProductBackLog> productBackLogs = new HashSet<ProductBackLog>(0);
+
+
 
     @Id
     @Column(name = "rid")
@@ -76,12 +81,23 @@ public class Release {
         this.releaseDate = releaseDate;
     }
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="pid")
+    public Set<ProductBackLog> getProductBackLogs() {
+        return productBackLogs;
+    }
+
+    public void setProductBackLogs(Set<ProductBackLog> productBackLogs) {
+        this.productBackLogs = productBackLogs;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Release release = (Release) o;
+        ReleaseBackLog release = (ReleaseBackLog) o;
 
         if (rid != release.rid) return false;
         if (uid != release.uid) return false;
