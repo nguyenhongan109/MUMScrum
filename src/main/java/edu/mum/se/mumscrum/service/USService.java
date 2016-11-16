@@ -1,6 +1,5 @@
 package edu.mum.se.mumscrum.service;
 
-import edu.mum.se.mumscrum.model.Employee;
 import edu.mum.se.mumscrum.model.Userstory;
 
 import java.util.List;

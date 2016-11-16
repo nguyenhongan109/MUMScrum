@@ -10,6 +10,7 @@ import java.sql.Date;
 @Table(name="timelogs")
 public class Timelogs {
     private int tid;
+    private int uid;
     private Integer duration;
     private Date updatedDate;
 
@@ -21,6 +22,16 @@ public class Timelogs {
 
     public void setTid(int tid) {
         this.tid = tid;
+    }
+
+    @Basic
+    @Column(name = "uid")
+    public Integer Uid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     @Basic

@@ -1,8 +1,5 @@
 package edu.mum.se.mumscrum.service;
 import edu.mum.se.mumscrum.model.ProductBackLog;
-import edu.mum.se.mumscrum.model.Userstory;
-import edu.mum.se.mumscrum.repository.ProductBackLogRepository;
-import edu.mum.se.mumscrum.repository.UserStoryRepository;
 import edu.mum.se.mumscrum.repository.ProductBackLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

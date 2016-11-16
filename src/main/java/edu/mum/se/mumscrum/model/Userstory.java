@@ -4,12 +4,16 @@ import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * Created by Min Gaung on 14/11/2016.
+ * Created by Min Gaung on 16/11/2016.
  */
 @Entity
 @Table(name="userstory")
 public class Userstory {
     private int uid;
+    private Integer sid;
+    private int pid;
+    private int rid;
+    private int eid;
     private String name;
     private String description;
     private Integer estimatedEffort;
@@ -17,10 +21,7 @@ public class Userstory {
     private Date completDate;
     private String status;
     private Date assignedDate;
-    private ProductBackLog productBackLog;
-    private ReleaseBackLog release;
-   // private Set<ProductBackLog> productBackLogs = new HashSet<ProductBackLog>(0);
-   // private Set<ReleaseBackLog> releases = new HashSet<ReleaseBackLog>(0);
+
     @Id
     @Column(name = "uid")
     public int getUid() {
@@ -29,6 +30,46 @@ public class Userstory {
 
     public void setUid(int uid) {
         this.uid = uid;
+    }
+
+    @Basic
+    @Column(name = "sid")
+    public Integer getSid() {
+        return sid;
+    }
+
+    public void setSid(Integer sid) {
+        this.sid = sid;
+    }
+
+    @Basic
+    @Column(name = "pid")
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
+    }
+
+    @Basic
+    @Column(name = "rid")
+    public int getRid() {
+        return rid;
+    }
+
+    public void setRid(int rid) {
+        this.rid = rid;
+    }
+
+    @Basic
+    @Column(name = "eid")
+    public int getEid() {
+        return eid;
+    }
+
+    public void setEid(int eid) {
+        this.eid = eid;
     }
 
     @Basic
@@ -101,27 +142,6 @@ public class Userstory {
         this.assignedDate = assignedDate;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rid")
-    public ReleaseBackLog getRelease() {
-        return this.release;
-    }
-
-    public void setRelease(ReleaseBackLog release) {
-        this.release = release;
-    }
-
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pid")
-   // @JsonManagedReference
-    public ProductBackLog getProductBackLog() {
-        return this.productBackLog;
-    }
-
-    public void setProductBackLog(ProductBackLog productBackLog) {
-        this.productBackLog = productBackLog;
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -130,6 +150,10 @@ public class Userstory {
         Userstory userstory = (Userstory) o;
 
         if (uid != userstory.uid) return false;
+        if (pid != userstory.pid) return false;
+        if (rid != userstory.rid) return false;
+        if (eid != userstory.eid) return false;
+        if (sid != null ? !sid.equals(userstory.sid) : userstory.sid != null) return false;
         if (name != null ? !name.equals(userstory.name) : userstory.name != null) return false;
         if (description != null ? !description.equals(userstory.description) : userstory.description != null)
             return false;
@@ -149,6 +173,10 @@ public class Userstory {
     @Override
     public int hashCode() {
         int result = uid;
+        result = 31 * result + (sid != null ? sid.hashCode() : 0);
+        result = 31 * result + pid;
+        result = 31 * result + rid;
+        result = 31 * result + eid;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (estimatedEffort != null ? estimatedEffort.hashCode() : 0);
@@ -158,6 +186,4 @@ public class Userstory {
         result = 31 * result + (assignedDate != null ? assignedDate.hashCode() : 0);
         return result;
     }
-
-
 }
