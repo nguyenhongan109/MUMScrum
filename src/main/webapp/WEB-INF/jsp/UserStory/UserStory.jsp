@@ -30,22 +30,35 @@
 
 
                             <div class="form-group">
-                                <label class="col-lg-3 control-label" for="productBackLog">Product Back Log:</label>
+                                <label class="col-lg-3 control-label" for="pid">Product BackLog:</label>
                                 <div class="col-lg-9">
-                                    <form:select path="productBackLog.pid" items="${productBackLogs}" itemValue="pid" id="PFilter"
-                                                 itemLabel="name" cssClass="form-control" />
-                                    <form:errors path="productBackLog.pid" cssClass="error"/>
+                                    <form:select path="pid" id="PFilter" cssClass="form-control" >
+                                        <form:option value="0" label="--- Select ---"/>
+                                        <form:options items="${productBackLogs}" itemLabel="name" itemValue="pid"/>
+                                    </form:select>
+                                    <form:errors path="pid" cssClass="error"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-lg-3" for="release">Release:</label>
+                                <label class="control-label col-lg-3" for="rid">Release:</label>
                                 <div class="col-lg-9">
-                                    <form:select id="releaseFilter" path="release.rid" cssClass="form-control">
+                                    <form:select id="releaseFilter" path="rid" cssClass="form-control">
                                         <form:options items="${releases}" itemLabel="name" itemValue="rid"/>
                                     </form:select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="status" class="col-lg-3 control-label">Status</label>
+                                <div class="col-lg-9">
+                                    <form:select path="status">
+                                        <form:options items="${statuslists}"/>
+                                    </form:select>
+                                    <form:errors path="status" cssClass="error"/>
+                                </div>
+                            </div>
+
+                            <form:input type="date" path="completDate" id="startDate" />
                             <input id="prodId" name="prodId" type="hidden" value="" />
 <%--
                             <div class="form-group">
@@ -123,13 +136,13 @@
 <script type="text/javascript" charset="utf-8">
 
     $(document).ready(function() {
-       UpdateSprint();
+       UpdateRelease();
         $('#PFilter').change(function()
         {
-            UpdateSprint();
+            UpdateRelease();
         });
 
-        function UpdateSprint()
+        function UpdateRelease()
         {
             $("#prodId").val($('#PFilter').val());
             var prodId = $("#prodId").val();
@@ -139,14 +152,14 @@
                 "prodId" : prodId
             };
 
-            var url = "<c:url value='/release/'/>";
+            var url = "<c:url value='/releasebyproduct/'/>";
             $.ajax({
                 type : "GET",
                 contentType : "application/json",
                 url : url + prodId,
                 data : JSON.stringify(data),
                 success : function(data) {
-                    var html = '<option value="">Not Selected (Optional)</option>';
+                    var html = '<option value="">--- Select ---</option>';
                     var len = data.length;
                     for ( var i = 0; i < len; i++) {
                         console.log(data[i].name);

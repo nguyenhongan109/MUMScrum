@@ -1,5 +1,7 @@
 package edu.mum.se.mumscrum.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -18,8 +20,10 @@ public class Userstory {
     private String description;
     private Integer estimatedEffort;
     private Integer actualEffort;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date completDate;
     private String status;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date assignedDate;
 
     @Id

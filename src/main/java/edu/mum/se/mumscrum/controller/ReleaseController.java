@@ -24,7 +24,7 @@ public class ReleaseController {
     private ProductBackLogService productBackLogService;
 
 
-    @RequestMapping(value = "/release/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/releasebyproduct/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<ReleaseBackLog>> listSprintByProject(@PathVariable("id") int pid) {
 
