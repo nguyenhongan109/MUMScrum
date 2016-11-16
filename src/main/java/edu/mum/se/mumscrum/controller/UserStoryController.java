@@ -1,7 +1,9 @@
 package edu.mum.se.mumscrum.controller;
 
-import edu.mum.se.mumscrum.model.Employee;
-import edu.mum.se.mumscrum.service.EmployeeService;
+import edu.mum.se.mumscrum.model.ProductBackLog;
+import edu.mum.se.mumscrum.model.Userstory;
+import edu.mum.se.mumscrum.service.ProductBackLogService;
+import edu.mum.se.mumscrum.service.UserStoryService;
 import edu.mum.se.mumscrum.utilities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,82 +15,74 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.EnumSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Min Gaung on 12/11/2016.
  */
 @Controller
-public class EmployeeController {
+public class UserStoryController {
 
     @Autowired
-    private EmployeeService employeeService;
-
-
-    private void roles(Model model) {
-        Map<String, String> roleH = new LinkedHashMap<String, String>();
-        for (Role role : EnumSet.allOf(Role.class)) {
-            roleH.put(role.name(), role.desc());
-        }
-        model.addAttribute("roleList", roleH);
+    private UserStoryService userStoryService;
+    @Autowired
+    private ProductBackLogService productBackLogService;
+    @ModelAttribute("productBackLogs")
+    public List<ProductBackLog> getAllProductBackLog() {
+        return productBackLogService.getAllProductBackLogs();
     }
-
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String employeeList(Model model) {
-        model.addAttribute("employees", employeeService.getAllEmployee());
-        return "admin";
+    @RequestMapping(value = "/userstorylist", method = RequestMethod.GET)
+    public String userStoryList(Model model) {
+        model.addAttribute("userstories", userStoryService.getAllUserStory());
+        return "userstorylist";
     }
 
 
-    @RequestMapping(value = "/admin/{id}", method = RequestMethod.GET)
-    public String employeeUpdate(@PathVariable("id") int id, Model model) {
+    @RequestMapping(value = "/userstoryupdate/{id}", method = RequestMethod.GET)
+    public String UserStoryUpdate(@PathVariable("id") int id, Model model) {
 
-        Employee employee = new Employee();
-        roles(model);
-        employee = employeeService.findByID(id);
-        model.addAttribute("employee", employee);
-        return "employee";
+        Userstory userstory = new Userstory();
+        userstory = userStoryService.findByID(id);
+        model.addAttribute("userstory", userstory);
+        return "userstory";
     }
 
-    @RequestMapping(value = "/employee", method = RequestMethod.GET)
-    public String employeePage(Employee employee,Model model) {
+    @RequestMapping(value = "/userstory", method = RequestMethod.GET)
+    public String UserStoryPage(Userstory userstory,Model model) {
 
-        roles(model);
-        model.addAttribute("employee", employee);
-        return "employee";
+        model.addAttribute("userstory", userstory);
+        return "userstory";
     }
 
     //Save or update
-    @RequestMapping(value = "/employee", method = RequestMethod.POST)
-    public String saveOrUpdateEmployee(@ModelAttribute("employee") @Validated Employee employee, BindingResult result, Model model) {
+    @RequestMapping(value = "/userstory", method = RequestMethod.POST)
+    public String saveOrUpdateUserStory(@ModelAttribute("userstory") @Validated Userstory userstory, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            roles(model);
-            return "employee";
+            return "userstory";
         }else{
             //update
-           if(employee.getEid()!=0) {
-                employeeService.save(employee);
+           if(userstory.getUid()!=0) {
+                userStoryService.save(userstory);
                return "redirect:/admin";
            }
-            else if (employeeService.findByEmail(employee.getEmail())){
-               model.addAttribute("message", "Employee already exists. Try again");
-               roles(model);
-               return "employee";
+            else if (userStoryService.checkByName(userstory.getName())){
+               model.addAttribute("message", "UserStory already exists. Try again");
+               return "userstory";
            }
-            employeeService.save(employee);
-            return "redirect:/admin";
+            userStoryService.save(userstory);
+            return "redirect:/userstorylist";
         }
 
 
     }
 
     //Delete
-    @RequestMapping(value = " employee/{id}/delete", method = RequestMethod.GET)
+    @RequestMapping(value = " userstorydelete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable("id") int id){
-        employeeService.delete(id);
-        return "redirect:/employeelist";
+        userStoryService.delete(id);
+        return "redirect:/userstorylist";
     }
 }

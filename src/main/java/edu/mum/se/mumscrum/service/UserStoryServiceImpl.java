@@ -1,56 +1,48 @@
 package edu.mum.se.mumscrum.service;
 
 import edu.mum.se.mumscrum.model.Employee;
+import edu.mum.se.mumscrum.model.Userstory;
 import edu.mum.se.mumscrum.repository.EmployeeRepository;
+import edu.mum.se.mumscrum.repository.UserStoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Min Gaung on 11/11/2016.
  */
-@Service("employeeService")
-public class EmployeeServiceImpl implements EmployeeService {
+@Service("userStoryService")
+public class UserStoryServiceImpl implements UserStoryService {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private UserStoryRepository userStoryRepository;
 
-    public Employee findByLogin(String email, String password) {
-        Employee employee = employeeRepository.findByEmail(email);
-        if(employee !=null && employee.getPassword().equals(password))
-            return employee;
-        else
-            return null;
+    @Override
+    public List<Userstory> getAllUserStory()
+    {
+        return userStoryRepository.findAll();
     }
-
-    public List<Employee> getAllEmployee() {
-       return employeeRepository.findAll();
+    @Override
+    public Userstory findByName(String name) {
+        return userStoryRepository.findByName(name);
     }
-
-    public boolean findByEmail(String email) {
-        Employee employee=  employeeRepository.findByEmail(email);
-        if(employee !=null)
+    @Override
+    public Userstory findByID(int id) {
+        return userStoryRepository.findByUid(id);
+    }
+    public boolean checkByName(String name) {
+        Userstory userstory=  userStoryRepository.findByName(name);
+        if(userstory !=null)
             return true;
         return false;
     }
-
-    @Override
-    public Employee findByID(int id) {
-        Employee employee = employeeRepository.findByEid(id);
-        if(employee !=null)
-            return employee;
-        else
-            return null;
-    }
-
-    public void save(Employee employee) {
-        employeeRepository.save(employee);
+    public void save(Userstory userstory) {
+        userStoryRepository.save(userstory);
     }
 
     public void delete(int id)
     {
-        employeeRepository.deleteByEid(id);
+        userStoryRepository.deleteByUid(id);
     }
 }

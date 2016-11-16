@@ -26,6 +26,7 @@
         <org.springframework-version>4.2.1.RELEASE</org.springframework-version>
         <org.springsecurity-version>4.0.2.RELEASE</org.springsecurity-version>
         <tiles.version>3.0.5</tiles.version>
+        <jackson-json.version>2.6.3</jackson-json.version>
     </properties>
     <dependencies>
         <dependency>
@@ -103,6 +104,11 @@
                     <artifactId>spring-aop</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-json.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -1,17 +1,14 @@
 package edu.mum.se.mumscrum.service;
 
-import edu.mum.se.mumscrum.model.Userstory;
+import edu.mum.se.mumscrum.model.ReleaseBackLog;
 
 import java.util.List;
 
 /**
  * Created by Min Gaung on 11/11/2016.
  */
-public interface SprintService {
-    List<Userstory> getAllUserStory();
-    Userstory findByName(String name);
-    boolean checkByName(String name);
-    Userstory findByID(int id);
-    void save(Userstory userstory);
-    void delete(int id);
+public interface ReleaseService {
+    public List<ReleaseBackLog> findAll();
+    public ReleaseBackLog findByRID(int id);
+    public List<ReleaseBackLog> findByPID(int id);
 }

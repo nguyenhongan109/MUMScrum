@@ -61,7 +61,7 @@
 
     <div></div>
 </div>
-<script src="jquery-1.8.3.js">
+<script src="js/jquery-1.8.3.js">
 </script>
 
 <script src="bootstrap/js/bootstrap.js">

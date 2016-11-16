@@ -1,17 +1,18 @@
 package edu.mum.se.mumscrum.service;
 
 import edu.mum.se.mumscrum.model.Employee;
+import edu.mum.se.mumscrum.model.Userstory;
 
 import java.util.List;
 
 /**
  * Created by Min Gaung on 11/11/2016.
  */
-public interface EmployeeService {
-    Employee findByLogin(String email, String password);
-    boolean findByEmail(String email);
-    List<Employee> getAllEmployee();
-    Employee findByID(int id);
-    void save(Employee employee);
+public interface UserStoryService {
+    List<Userstory> getAllUserStory();
+    Userstory findByName(String name);
+    boolean checkByName(String name);
+    Userstory findByID(int id);
+    void save(Userstory userstory);
     void delete(int id);
 }
