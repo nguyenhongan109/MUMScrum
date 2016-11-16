@@ -17,9 +17,6 @@ public class ReleaseBackLog {
     private String name;
     private String description;
     private Date releaseDate;
-    private Set<ProductBackLog> productBackLogs = new HashSet<ProductBackLog>(0);
-
-
 
     @Id
     @Column(name = "rid")
@@ -79,16 +76,6 @@ public class ReleaseBackLog {
 
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
-    }
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="pid")
-    public Set<ProductBackLog> getProductBackLogs() {
-        return productBackLogs;
-    }
-
-    public void setProductBackLogs(Set<ProductBackLog> productBackLogs) {
-        this.productBackLogs = productBackLogs;
     }
 
 
