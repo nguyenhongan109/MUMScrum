@@ -23,8 +23,7 @@
                                                 id="estimation" placeholder="Estimation"/>
                                     <form:errors path="estimatedEffort" cssClass="error"/>
 
-
-                                        <button class="btn btn-primary">Estimate</button>
+                                    <button class="btn btn-primary">Save</button>
                                     <form:hidden path="uid"/>
                                     <form:hidden path="name"/>
                                     <form:hidden path="description"/>
