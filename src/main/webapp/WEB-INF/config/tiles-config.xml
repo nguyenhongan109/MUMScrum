@@ -36,6 +36,7 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/HRAdmin/Employee.jsp" />
 	</definition>
 
+
 <!-- User Story-->
 	<definition name="userstorylist" extends="baseLayout">
 		<put-attribute name="menu" value="/WEB-INF/jsp/common/menu.jsp"/>
@@ -46,6 +47,18 @@
 		<put-attribute name="menu" value="/WEB-INF/jsp/common/menu.jsp"/>
 		<put-attribute name="head" value="" />
 		<put-attribute name="body" value="/WEB-INF/jsp/UserStory/UserStory.jsp" />
+	</definition>
+
+	<definition name="effortList" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/jsp/developer/EffortList.jsp"/>
+	</definition>
+
+	<definition name="estimateEffort" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/jsp/developer/EstimateEffort.jsp"/>
+	</definition>
+
+	<definition name="updateEffort" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/jsp/developer/UpdateEffort.jsp"/>
 	</definition>
 
 	<!-- Product Backlog -->

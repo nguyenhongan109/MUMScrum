@@ -14,6 +14,7 @@
                                     <form:input type="text" class="form-control" path="email"
                                                 id="emailInput" placeholder="Email"/>
                                     <form:errors path="email" cssClass="error"/>
+
                                 </div>
                             </div>
 
