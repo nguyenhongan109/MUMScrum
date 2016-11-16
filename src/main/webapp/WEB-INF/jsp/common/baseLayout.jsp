@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,6 +11,11 @@
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet"/>
     <link href="../datepicker/css/datepicker.css" rel="stylesheet"/>
     <link href="../assets/css/bootstrap-united.css" rel="stylesheet"/>
+
+    <script src="../js/jquery-1.11.3.js"
+            type="text/javascript"></script>
+    <script src="../js/jquery.validate.min.js"
+            type="text/javascript"></script>
 
     <style>
         .error {
@@ -26,17 +31,23 @@
             padding: 8px;
             margin: 16px;
         }
+
+        div:empty {
+            display: none;
+        }
     </style>
+
 
 </head>
 <body>
-<script src="../jquery-1.8.3.js">
 
-</script>
-
-<script src="../bootstrap/js/bootstrap.js">
-
-</script>
+<div>
+    <%--
+    <c:if test="${empty sessionScope.employee.role && loginPage!=true}">
+        <c:redirect url="/login"></c:redirect>
+    </c:if>
+    --%>
+</div>
 <div>
     <tiles:insertAttribute name="menu"/>
 </div>
@@ -45,16 +56,9 @@
     <tiles:insertAttribute name="head"/>
 </div>
 
-<div class="col-lg-6 col-lg-offset-3" >
-    <div class="well">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <tiles:insertAttribute name="body"/>
-                </div>
-            </div>
-        </div>
-   </div>
+<div style="width: 99%;overflow-x: hidden">
+    <tiles:insertAttribute name="body"/>
 </div>
+
 </body>
 </html>

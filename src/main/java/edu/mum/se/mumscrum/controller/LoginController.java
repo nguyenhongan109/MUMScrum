@@ -20,7 +20,6 @@ import javax.validation.Valid;
  * Created by Min Gaung on 11/11/2016.
  */
 @Controller
-@SessionAttributes("employee")
 public class LoginController {
 
 
@@ -28,21 +27,27 @@ public class LoginController {
     private EmployeeService employeeService;
 
    @RequestMapping(value="/login", method= RequestMethod.GET)
-    public String loginPage(Model model) {
+    public String loginPage(Model model,HttpSession session) {
+       model.addAttribute("loginPage",true);
        model.addAttribute("employeeLogin", new EmployeeLogin());
        return "login";
     }
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
     public String login(@Valid @ModelAttribute("employeeLogin") EmployeeLogin employeeLogin, BindingResult result, HttpSession session) {
+
         if (result.hasErrors()) {
             return "login";
         } else {
             Employee employee = employeeService.findByLogin(employeeLogin.getEmail(),employeeLogin.getPassword());
             if (employee!=null) {
+                session.removeAttribute("employee");
                 session.setAttribute("employee",employee);
+
                 if(Role.ADMIN.name().equals(employee.getRole()))
-                    return "redirect:/employeelist";
+                    return "redirect:/admin";
+                if(Role.POWNER.name().equals(employee.getRole()))
+                    return "redirect:/userstorylist";
                 return "success";
             } else {
                 return "failure";

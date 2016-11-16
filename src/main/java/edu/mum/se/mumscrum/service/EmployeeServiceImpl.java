@@ -18,7 +18,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public Employee findByLogin(String email, String password) {
-        Employee employee = employeeRepository.findByEmployeeEmail(email);
+        Employee employee = employeeRepository.findByEmail(email);
         if(employee !=null && employee.getPassword().equals(password))
             return employee;
         else
@@ -26,26 +26,31 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public List<Employee> getAllEmployee() {
-       return employeeRepository.getAllEmployee();
+       return employeeRepository.findAll();
     }
 
     public boolean findByEmail(String email) {
-        Employee employee=  employeeRepository.findByEmployeeEmail(email);
+        Employee employee=  employeeRepository.findByEmail(email);
         if(employee !=null)
             return true;
         return false;
     }
 
     @Override
-    public Employee findByID(String eid) {
-        Employee employee = employeeRepository.findByEmployeeEmail(eid);
+    public Employee findByID(int id) {
+        Employee employee = employeeRepository.findByEid(id);
         if(employee !=null)
             return employee;
         else
             return null;
     }
 
-    public Employee save(Employee employee) {
-        return employeeRepository.save(employee);
+    public void save(Employee employee) {
+        employeeRepository.save(employee);
+    }
+
+    public void delete(int id)
+    {
+        employeeRepository.deleteByEid(id);
     }
 }
