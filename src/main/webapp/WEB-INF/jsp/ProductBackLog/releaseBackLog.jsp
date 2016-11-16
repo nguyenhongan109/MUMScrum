@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <label for="releaseDateInput" class="col-lg-3 control-label">Release Date</label>
                                 <div class="col-lg-9">
-                                    <form:input type="text" class="form-control" path="releaseDate"
+                                    <form:input type="date" class="form-control" path="releaseDate" cssClass="date-picker"
                                                 id="releaseDateInput"/>
                                     <form:errors path="releaseDate" cssClass="error"/>
                                 </div>
