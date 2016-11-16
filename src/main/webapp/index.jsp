@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 <%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:redirect url="/effortList" />
-=======
 <html>
 <head>
     <link href="assets/css/bootstrap-united.css" rel="stylesheet"/>
@@ -69,4 +67,3 @@
 
 </body>
 </html>
->>>>>>> 7f90decac6d9cf57035500f8f0659e247689df37
