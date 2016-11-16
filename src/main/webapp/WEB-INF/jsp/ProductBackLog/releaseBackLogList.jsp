@@ -1,5 +1,4 @@
 <%@ include file="/WEB-INF/jsp/common/taglib.jsp" %>
-<spring:url value="/productBackLogList/${currentProductBackLog}" var="ActionUrl" />
 
 <div class="container">
     <c:if test="${not empty message}">

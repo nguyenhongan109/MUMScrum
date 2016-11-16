@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Created by tony on 11/14/16.
@@ -43,7 +44,7 @@ public class ReleaseBackLogController {
         Employee e = (Employee)session.getAttribute("employee");
         releaseBackLog.setUid(e.getEid());
 
-        releaseBackLog.setReleaseDate(new Date(2016,11,15));
+        releaseBackLog.setReleaseDate(Date.valueOf(LocalDate.now()));
         model.addAttribute("currentProductBackLog", pid);
         model.addAttribute("releaseBackLog", releaseBackLog);
         return "releaseBackLog";

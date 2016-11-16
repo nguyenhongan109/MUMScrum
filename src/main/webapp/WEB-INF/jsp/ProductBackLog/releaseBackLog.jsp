@@ -17,6 +17,7 @@
                             <form:hidden path="rid"/>
                             <form:hidden path="pid"/>
                             <form:hidden path="uid"/>
+
                             <div class="form-group">
                                 <label for="nameInput" class="col-lg-3 control-label">Name</label>
                                 <div class="col-lg-9">
@@ -34,7 +35,15 @@
                                     <form:errors path="description" cssClass="error"/>
                                 </div>
                             </div>
-                            <form:hidden path="releaseDate"/>
+
+                            <div class="form-group">
+                                <label for="releaseDateInput" class="col-lg-3 control-label">Release Date</label>
+                                <div class="col-lg-9">
+                                    <form:input type="text" class="form-control" path="releaseDate"
+                                                id="releaseDateInput"/>
+                                    <form:errors path="releaseDate" cssClass="error"/>
+                                </div>
+                            </div>
 
                             <div class="col-lg-9 col-lg-offset-3">
                                 <spring:url value="/releaseBackLogList/${currentProductBackLog}" var="rblURL"/>
@@ -87,4 +96,3 @@
         </div>
     </div>
 </div>
-
