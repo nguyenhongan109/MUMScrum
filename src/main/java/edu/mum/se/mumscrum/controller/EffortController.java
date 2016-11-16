@@ -42,7 +42,7 @@ public class EffortController {
         return "redirect:/effortList";
     }
 
-
+    //update Effort
     @RequestMapping(value = "/updateEffort/{id}", method = RequestMethod.GET)
     public String retrieveUpdateEffort(@ModelAttribute("userStory") @Validated Userstory userStory
             , @PathVariable("id") int id, Model model){

@@ -25,6 +25,10 @@
 
                                     <button class="btn btn-primary">Save</button>
                                     <form:hidden path="uid"/>
+                                    <form:hidden path="pid"/>
+                                    <form:hidden path="rid"/>
+                                    <form:hidden path="sid"/>
+                                    <form:hidden path="eid"/>
                                     <form:hidden path="name"/>
                                     <form:hidden path="description"/>
                                     <form:hidden path="actualEffort"/>
