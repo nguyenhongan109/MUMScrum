@@ -7,8 +7,8 @@ import java.sql.Date;
  * Created by Min Gaung on 14/11/2016.
  */
 @Entity
-@Table(name="release")
-public class Release {
+@Table(name="releaseBackLog")
+public class ReleaseBackLog {
     private int rid;
     private int uid;
     private int pid;
@@ -81,7 +81,7 @@ public class Release {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Release release = (Release) o;
+        ReleaseBackLog release = (ReleaseBackLog) o;
 
         if (rid != release.rid) return false;
         if (uid != release.uid) return false;

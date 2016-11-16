@@ -1,5 +1,7 @@
 package edu.mum.se.mumscrum.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 
 /**
@@ -25,6 +27,7 @@ public class ProductBackLog {
 
     @Basic
     @Column(name = "name")
+    @NotBlank(message = "Please input a Name!")
     public String getName() {
         return name;
     }
@@ -45,6 +48,7 @@ public class ProductBackLog {
 
     @Basic
     @Column(name = "status")
+    @NotBlank(message = "Please select a status!")
     public String getStatus() {
         return status;
     }
