@@ -43,6 +43,7 @@ public class LoginController {
             if (employee!=null) {
                 session.removeAttribute("employee");
                 session.setAttribute("employee",employee);
+
                 if(Role.ADMIN.name().equals(employee.getRole()))
                     return "redirect:/admin";
                 if(Role.POWNER.name().equals(employee.getRole()))

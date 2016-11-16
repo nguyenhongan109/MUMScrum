@@ -32,7 +32,7 @@ public class UserStoryController {
     private ProductBackLogService productBackLogService;
     @ModelAttribute("productBackLogs")
     public List<ProductBackLog> getAllProductBackLog() {
-        return productBackLogService.getAllProductBackLogs();
+        return productBackLogService.getAllProductBackLog();
     }
     @RequestMapping(value = "/userstorylist", method = RequestMethod.GET)
     public String userStoryList(Model model) {
