@@ -35,5 +35,17 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/HRAdmin/Employee.jsp" />
 	</definition>
 
+	<definition name="effortList" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/jsp/developer/EffortList.jsp"/>
+	</definition>
+
+	<definition name="estimateEffort" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/jsp/developer/EstimateEffort.jsp"/>
+	</definition>
+
+	<definition name="updateEffort" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/jsp/developer/UpdateEffort.jsp"/>
+	</definition>
+
 
 </tiles-definitions>
