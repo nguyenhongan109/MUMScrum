@@ -1,9 +1,12 @@
 package edu.mum.se.mumscrum.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.util.Calendar;
 
 /**
  * Created by Min Gaung on 16/11/2016.
@@ -16,16 +19,23 @@ public class Userstory {
     private int pid;
     private int rid;
     private int eid;
+    @NotEmpty
+    @Size(min=4, max=100)
     private String name;
+    @NotEmpty
+    @Size(min=4, max=256)
     private String description;
     private Integer estimatedEffort;
     private Integer actualEffort;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date completDate;
     private String status;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date assignedDate;
 
+    public Userstory()
+    {
+        assignedDate=new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        completDate=new Date(0,0,0);
+    }
     @Id
     @Column(name = "uid")
     public int getUid() {
@@ -117,7 +127,7 @@ public class Userstory {
     }
 
     @Basic
-    @Column(name = "completDate")
+    @Column(name = "completDate", nullable=true)
     public Date getCompletDate() {
         return completDate;
     }
@@ -143,7 +153,8 @@ public class Userstory {
     }
 
     public void setAssignedDate(Date assignedDate) {
-        this.assignedDate = assignedDate;
+        this.assignedDate =assignedDate;
+
     }
 
     @Override
@@ -189,5 +200,11 @@ public class Userstory {
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (assignedDate != null ? assignedDate.hashCode() : 0);
         return result;
+    }
+    public Date ComDate()
+    {
+        if(this.getCompletDate().equals(new java.sql.Date(0,0,0)))
+            return null;
+        else return this.completDate;
     }
 }

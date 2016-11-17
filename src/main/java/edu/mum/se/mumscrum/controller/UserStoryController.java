@@ -1,12 +1,16 @@
 package edu.mum.se.mumscrum.controller;
 
 import edu.mum.se.mumscrum.model.ProductBackLog;
+import edu.mum.se.mumscrum.model.ReleaseBackLog;
 import edu.mum.se.mumscrum.model.Userstory;
 import edu.mum.se.mumscrum.service.ProductBackLogService;
+import edu.mum.se.mumscrum.service.ReleaseService;
 import edu.mum.se.mumscrum.service.UserStoryService;
 import edu.mum.se.mumscrum.utilities.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,8 +18,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 /**
  * Created by Min Gaung on 12/11/2016.
@@ -26,16 +32,10 @@ public class UserStoryController {
     @Autowired
     private UserStoryService userStoryService;
     @Autowired
+    private ReleaseService releaseService;
+    @Autowired
     private ProductBackLogService productBackLogService;
 
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(true);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat,false));
-
-    }
     @ModelAttribute("productBackLogs")
     public List<ProductBackLog> getAllProductBackLog() {
         return productBackLogService.getAllProductBackLog();
@@ -65,9 +65,10 @@ public class UserStoryController {
     }
 
     @RequestMapping(value = "/userstory", method = RequestMethod.GET)
-    public String UserStoryPage(Model model) {
+    public String UserStoryPage(Userstory userstory, Model model) {
 
-        model.addAttribute("userstory", new Userstory());
+        model.addAttribute("userstory", userstory);
+        model.addAttribute("cdate",new java.sql.Date(0,0,0));
         return "userstory";
     }
 
@@ -80,7 +81,7 @@ public class UserStoryController {
             //update
            if(userstory.getUid()!=0) {
                 userStoryService.save(userstory);
-               return "redirect:/admin";
+               return "redirect:/userstorylist";
            }
             else if (userStoryService.checkByName(userstory.getName())){
                model.addAttribute("message", "UserStory already exists. Try again");
@@ -96,7 +97,24 @@ public class UserStoryController {
     //Delete
     @RequestMapping(value = " userstorydelete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable("id") int id){
-        userStoryService.delete(id);
+        Userstory userstory=userStoryService.findByID(id);
+        userstory.setStatus("Deleted");
         return "redirect:/userstorylist";
+    }
+
+    @RequestMapping(value = "/releasebyproduct/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<ReleaseBackLog>> listSprintByProject(@PathVariable("id") int pid) {
+
+        HttpStatus httpStatus = HttpStatus.OK;
+        //ReleaseBackLog release = releaseService.findByPID(pid);
+        List<ReleaseBackLog> releaseList;
+        if(pid==0){
+            releaseList = releaseService.findAll();
+        }else{
+            releaseList = releaseService.findByPID(pid);
+        }
+
+        return new ResponseEntity<List<ReleaseBackLog>>(releaseList, httpStatus);
     }
 }

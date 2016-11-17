@@ -46,9 +46,10 @@ public class LoginController {
 
                 if(Role.ADMIN.name().equals(employee.getRole()))
                     return "redirect:/admin";
-                if(Role.POWNER.name().equals(employee.getRole()))
+                else if(Role.POWNER.name().equals(employee.getRole()))
                     return "redirect:/userstorylist";
-                return "success";
+                else
+                    return "redirect:/effortlist";
             } else {
                 return "failure";
             }

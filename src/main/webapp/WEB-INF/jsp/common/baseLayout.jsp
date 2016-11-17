@@ -16,6 +16,8 @@
             type="text/javascript"></script>
     <script src="../../../js/jquery.validate.min.js"
             type="text/javascript"></script>
+    <script src="../bootstrap/js/bootstrap.js">
+    </script>
 
     <style type="text/css">
         .error {
