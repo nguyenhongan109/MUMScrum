@@ -32,7 +32,7 @@ public class ProductBackLogController {
         return "productBackLogList";
     }
 
-    private void status(Model model){
+    private void getStatusList(Model model){
         Map<String, String> statusH = new LinkedHashMap<String, String>();
         for (Status status : EnumSet.allOf(Status.class)) {
             statusH.put(status.name(), status.desc());
@@ -43,7 +43,7 @@ public class ProductBackLogController {
     @RequestMapping(value = "/productBackLog/{id}", method = RequestMethod.GET)
     public String updateProductBackLog(@PathVariable("id") int id, Model model){
         ProductBackLog productBackLog = new ProductBackLog();
-        status(model);
+        getStatusList(model);
         productBackLog = productBackLogService.findByPid(id);
         model.addAttribute("productBackLog", productBackLog);
         return "productBackLog";
@@ -51,7 +51,7 @@ public class ProductBackLogController {
 
     @RequestMapping(value = "/productBackLog", method = RequestMethod.GET)
     public String productBackLogPage(Model model) {
-        status(model);
+        getStatusList(model);
         model.addAttribute("productBackLog",new ProductBackLog());
         return "productBackLog";
     }
@@ -60,7 +60,7 @@ public class ProductBackLogController {
     @RequestMapping(value = "/productBackLog", method = RequestMethod.POST)
     public String saveOrUpdateProductBackLog(@ModelAttribute("productBackLog") @Validated ProductBackLog productBackLog, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            status(model);
+            getStatusList(model);
             return "productBackLog";
         }else{
             //update
@@ -70,7 +70,7 @@ public class ProductBackLogController {
             }
             else if (productBackLogService.findByName(productBackLog.getName())){
                 model.addAttribute("message", "Product BackLog already exists. Try again");
-                status(model);
+                getStatusList(model);
                 return "productBackLog";
             }
             productBackLogService.save(productBackLog);

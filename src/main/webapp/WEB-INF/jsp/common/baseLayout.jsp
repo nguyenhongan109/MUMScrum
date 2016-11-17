@@ -6,20 +6,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <link href="../assets/css/bootstrap-united.css" rel="stylesheet"/>
-    <link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>
-    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet"/>
-    <link href="../datepicker/css/datepicker.css" rel="stylesheet"/>
-    <link href="../assets/css/bootstrap-united.css" rel="stylesheet"/>
+    <link href="../../../assets/css/bootstrap-united.css" rel="stylesheet"/>
+    <link href="../../../bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>
+    <link href="../../../bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link href="../../../datepicker/css/datepicker.css" rel="stylesheet"/>
+    <link href="../../../assets/css/bootstrap-united.css" rel="stylesheet"/>
 
-    <script src="../js/jquery-1.11.3.js"
+    <script src="../../../js/jquery-1.11.3.js"
             type="text/javascript"></script>
-    <script src="../js/jquery.validate.min.js"
+    <script src="../../../js/jquery.validate.min.js"
             type="text/javascript"></script>
     <script src="../bootstrap/js/bootstrap.js">
     </script>
 
-    <style>
+    <style type="text/css">
         .error {
             color: #ff0000;
             font-size: 0.9em;
