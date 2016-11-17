@@ -1,9 +1,9 @@
 package edu.mum.se.mumscrum.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Min Gaung on 14/11/2016.
@@ -50,6 +50,7 @@ public class ReleaseBackLog {
 
     @Basic
     @Column(name = "name")
+    @NotBlank(message = "Please input a Name!")
     public String getName() {
         return name;
     }
