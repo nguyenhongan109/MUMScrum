@@ -1,3 +1,4 @@
+<%@ page import="java.sql.Date" %>
 <%@ include file="/WEB-INF/jsp/common/taglib.jsp" %>
 
 <div class="container">
@@ -32,7 +33,7 @@
                 <td>${us.description}</td>
                 <td>${us.estimatedEffort}</td>
                 <td>${us.actualEffort}</td>
-                <td>${us.completDate}</td>
+                <td>${us.ComDate()}</td>
                 <td>${us.assignedDate}</td>
                 <td>${us.status}</td>
                 <td>

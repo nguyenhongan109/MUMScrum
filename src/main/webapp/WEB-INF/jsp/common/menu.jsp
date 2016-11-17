@@ -26,6 +26,10 @@
                 <c:when test="${sessionScope.employee.role == 'POWNER'}">
                     <li><a href="/userstorylist">Home</a></li>
                     <li><a>|</a></li>
+                    <li><a href="/productBackLogList">Product Backlog</a></li>
+                    <li><a>|</a></li>
+                    <li><a href="/releaseBackLogList">Release Backlog</a></li>
+                    <li><a>|</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">User Story<b
                             class="caret"></b></a>
                         <ul class="dropdown-menu">

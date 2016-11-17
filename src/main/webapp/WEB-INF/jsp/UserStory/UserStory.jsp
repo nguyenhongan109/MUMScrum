@@ -39,7 +39,7 @@
                                     <form:errors path="pid" cssClass="error"/>
                                 </div>
                             </div>
-
+                            <input id="relId" name="relId" type="hidden" value="${userstory.rid}" />
                             <div class="form-group">
                                 <label class="control-label col-lg-3" for="rid">Release:</label>
                                 <div class="col-lg-9">
@@ -57,38 +57,20 @@
                                     <form:errors path="status" cssClass="error"/>
                                 </div>
                             </div>
+                            <form:hidden path="sid"/>
+                            <form:hidden path="eid"/>
+                            <form:hidden path="actualEffort"/>
+                            <form:hidden path="completDate"/>
+                            <form:hidden path="assignedDate"/>
 
-                            <form:input type="date" path="completDate" id="startDate" />
                             <input id="prodId" name="prodId" type="hidden" value="" />
-<%--
-                            <div class="form-group">
-                                <label for="emailInput" class="col-lg-3 control-label">Email Address</label>
-                                <div class="col-lg-9">
-                                    <form:input type="text" class="form-control" path="email"
-                                                id="emailInput"
-                                                placeholder="Email Address"/>
-                                    <form:errors path="email" cssClass="error"/>
-                                </div>
-                            </div>
 
-                            <spring:bind path="password">
-                                <div class="form-group">
-                                    <label for="passwordInput" class="col-lg-3 control-label">Password</label>
-                                    <div class="col-lg-9">
-                                        <form:password path="password" class="form-control" id="passwordInput"
-                                                       placeholder="password"/>
-                                        <form:errors path="password" cssClass="error"/>
-                                    </div>
-                                </div>
-                            </spring:bind>
 
                             <div class="col-lg-9 col-lg-offset-3">
-                                <spring:url value="/admin" var="adminUrl"/>
-
-                                <button type="reset" class="btn btn-default" onclick="location.href='${adminUrl}'"  formnovalidate>Cancel</button>
+                                <button type="reset" class="btn btn-default" onclick="location.href='/userstorylist'"  formnovalidate>Cancel</button>
 
                                 <c:choose>
-                                    <c:when test="${employee.eid != 0}">
+                                    <c:when test="${userstory.uid != 0}">
                                         <button class="btn btn-primary" data-toggle="modal"
                                                 data-target="#themodal">Update
                                         </button>
@@ -106,7 +88,7 @@
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-hidden="true">&times;</button>
-                                                <h3>Employee Form Submission</h3>
+                                                <h3>User Story Form Submission</h3>
                                             </div>
                                             <div class="modal-body">
                                                 <p>Are you sure you want to do this?</p>
@@ -125,7 +107,7 @@
                                 </div>
 
                             </div>
---%>
+
                         </fieldset>
                     </form:form>
                 </div>
@@ -134,7 +116,6 @@
     </div>
 </div>
 <script type="text/javascript" charset="utf-8">
-
     $(document).ready(function() {
        UpdateRelease();
         $('#PFilter').change(function()
@@ -147,6 +128,8 @@
             $("#prodId").val($('#PFilter').val());
             var prodId = $("#prodId").val();
             console.log("Pid: "+prodId);
+            var relId=$("#relId").val();
+            console.log("Rid:"+relId);
 
             var data = {
                 "prodId" : prodId
@@ -170,6 +153,7 @@
                     html += '</option>';
 
                     $('#releaseFilter').html(html);
+                    $('#releaseFilter').val(relId);
                 },
                 error : function(xhr, status, exception) {
                     console.log(xhr, status, exception);
