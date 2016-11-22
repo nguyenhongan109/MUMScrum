@@ -88,4 +88,11 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/BurnDownChart.jsp" />
 	</definition>
 
+    <definition name="assignPBL" extends="baseLayout">
+        <put-attribute name="menu" value="/WEB-INF/jsp/productOwner/assignPBL.jsp"/>
+    </definition>
+    <definition name="assignPB" extends="baseLayout">
+        <put-attribute name="menu" value="/WEB-INF/jsp/productOwner/assignPBForm.jsp"/>
+    </definition>
+
 </tiles-definitions>

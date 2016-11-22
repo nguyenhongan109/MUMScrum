@@ -1,5 +1,7 @@
 package edu.mum.se.mumscrum.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -48,6 +50,7 @@ public class ReleaseBackLog {
 
     @Basic
     @Column(name = "name")
+    @NotBlank(message = "Please input a Name!")
     public String getName() {
         return name;
     }

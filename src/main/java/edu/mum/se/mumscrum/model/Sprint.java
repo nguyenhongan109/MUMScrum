@@ -10,8 +10,6 @@ import java.sql.Date;
 @Table(name="sprint")
 public class Sprint {
     private int sid;
-    private int uid;
-    private int rid;
     private String name;
     private String description;
     private Date startDate;
@@ -30,25 +28,6 @@ public class Sprint {
         this.sid = sid;
     }
 
-    @Basic
-    @Column(name = "uid")
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
-
-    @Basic
-    @Column(name = "rid")
-    public int getRid() {
-        return rid;
-    }
-
-    public void setRid(int rid) {
-        this.rid = rid;
-    }
 
     @Basic
     @Column(name = "name")
@@ -128,8 +107,6 @@ public class Sprint {
         Sprint sprint = (Sprint) o;
 
         if (sid != sprint.sid) return false;
-        if (uid != sprint.uid) return false;
-        if (rid != sprint.rid) return false;
         if (assignedTo != sprint.assignedTo) return false;
         if (name != null ? !name.equals(sprint.name) : sprint.name != null) return false;
         if (description != null ? !description.equals(sprint.description) : sprint.description != null) return false;
@@ -145,8 +122,6 @@ public class Sprint {
     @Override
     public int hashCode() {
         int result = sid;
-        result = 31 * result + uid;
-        result = 31 * result + rid;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);

@@ -24,6 +24,10 @@
                                     <form:errors path="estimatedEffort" cssClass="error"/>
 
                                     <button class="btn btn-primary">Save</button>
+
+                                    <spring:url value="/effortList" var="cancelUpdate"/>
+
+                                    <button type="reset" class="btn btn-default" onclick="location.href='${cancelUpdate}'"  formnovalidate>Cancel</button>
                                     <form:hidden path="uid"/>
                                     <form:hidden path="pid"/>
                                     <form:hidden path="rid"/>
