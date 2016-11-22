@@ -12,7 +12,6 @@
             <th>Assign Date</th>
             <th>Start Date</th>
             <th>End Date</th>
-            <th>Assign To</th>
             <th>Status</th>
         </tr>
         </thead>

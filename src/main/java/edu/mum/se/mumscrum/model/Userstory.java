@@ -2,6 +2,7 @@ package edu.mum.se.mumscrum.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Calendar;
 
 /**
  * Created by Min Gaung on 22/11/2016.
@@ -25,7 +26,7 @@ public class Userstory {
     public Userstory()
     {
         completDate=new Date(0,0,0);
-        assignedDate=new Date(0,0,0);
+        assignedDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
     }
     @Id
     @Column(name = "uid")

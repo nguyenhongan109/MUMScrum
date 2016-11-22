@@ -57,9 +57,6 @@
                             <form:hidden path="assignedDate"/>
                             <form:hidden path="status"/>
 
-                            <input id="prodId" name="prodId" type="hidden" value="" />
-
-
                             <div class="col-lg-9 col-lg-offset-3">
                                 <button type="reset" class="btn btn-default" onclick="location.href='/AssignDevList'"  formnovalidate>Cancel</button>
 

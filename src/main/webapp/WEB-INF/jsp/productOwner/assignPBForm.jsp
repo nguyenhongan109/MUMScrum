@@ -56,8 +56,10 @@
                                 <spring:url value="/assignPBL" var="pblURL"/>
                                 <button type="reset" class="btn btn-default" onclick="location.href='${pblURL}'" formnovalidate>Cancel</button>
 
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#themodal">Assign
+                                <button class="btn btn-primary" type="submit">Assign
+
                                 </button>
+
 
                             </div>
 

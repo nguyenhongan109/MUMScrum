@@ -15,7 +15,6 @@
                                     <form:select path="sid" id="sid" cssClass="form-control">
                                         <form:options items="${sprints}" itemLabel="name" itemValue="sid"/>
                                     </form:select>
-                                    <form:errors path="sid" cssClass="error"/>
                                 </div>
                             </div>
 
@@ -24,8 +23,7 @@
                                 <button type="reset" class="btn btn-default" onclick="location.href='/burndownchart'"
                                         formnovalidate>Cancel
                                 </button>
-                                <button type="submit" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#themodal">View Chart
+                                <button class="btn btn-primary" type="submit">View Chart
                                 </button>
                             </div>
                         </fieldset>
