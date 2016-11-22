@@ -59,7 +59,7 @@
                     </li>
                     <li><a href="/AssignSprintList">Assign Sprint</a></li>
                     <li><a href="/AssignDevList">Assign Developer</a></li>
-                    <li><a href="#">View Burndown Chart</a></li>
+                    <li><a href="/burndownchart">View Burndown Chart</a></li>
                     <li><a href="/login">Logout</a></li>
                 </c:when>
 

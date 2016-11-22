@@ -125,4 +125,12 @@
 		<put-attribute name="head" value="" />
 		<put-attribute name="body" value="/WEB-INF/jsp/Sprint/SprintList.jsp" />
 	</definition>
+	<definition name="burndownchart" extends="baseLayout">
+		<put-attribute name="head" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/BurnDownChartSelection.jsp" />
+	</definition>
+	<definition name="burndownchartview" extends="baseLayout">
+		<put-attribute name="head" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/BurnDownChart.jsp" />
+	</definition>
 </tiles-definitions>
