@@ -58,9 +58,6 @@ public class Timelogs {
         return sid;
     }
 
-    public void setSid(int sid) {
-        this.sid = sid;
-    }
     @Basic
     @Column(name = "todayEffort")
     public int getTodayEffort() { return todayEffort;}

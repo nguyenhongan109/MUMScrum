@@ -17,5 +17,4 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findByRole(String Role);
     @Transactional
     Long deleteByEid(int eid);
-    List<Employee> findByRole(String role);
 }

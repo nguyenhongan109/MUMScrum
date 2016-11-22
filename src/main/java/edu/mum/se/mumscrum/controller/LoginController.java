@@ -52,7 +52,7 @@ public class LoginController {
                 else if(Role.SCRUMASTER.name().equals(employee.getRole()))
                     return "redirect:/AssignSprintList";
                 else
-                    return "redirect:/effortlist";
+                    return "redirect:/effortList";
             } else {
                 return "failure";
             }

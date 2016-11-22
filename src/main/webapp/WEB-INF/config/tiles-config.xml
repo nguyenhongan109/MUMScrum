@@ -113,6 +113,14 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/Sprint/Sprint.jsp" />
 	</definition>
 
+	<definition name="assignPBL" extends="baseLayout">
+		<put-attribute name="head" value="" />
+        <put-attribute name="body" value="/WEB-INF/jsp/productOwner/assignPBL.jsp"/>
+    </definition>
+    <definition name="assignPB" extends="baseLayout">
+		<put-attribute name="head" value="" />
+        <put-attribute name="body" value="/WEB-INF/jsp/productOwner/assignPBForm.jsp"/>
+    </definition>
 	<definition name="sprintlist" extends="baseLayout">
 		<put-attribute name="head" value="" />
 		<put-attribute name="body" value="/WEB-INF/jsp/Sprint/SprintList.jsp" />

@@ -44,9 +44,7 @@
                             <li><a href="/userstorylist">User Story List</a></li>
                         </ul>
                     </li>
-                    <%--<li><a>|</a></li>--%>
-                    <li><a href="#">Assign Scrum Master</a></li>
-                    <%--<li><a>|</a></li>--%>
+                    <li><a href="/assignPBL">Assign Scrum Master</a></li>
                     <li><a href="/login">Logout</a></li>
                 </c:when>
                 <c:when test="${sessionScope.employee.role == 'SCRUMASTER'}">
@@ -64,9 +62,9 @@
                     <li><a href="#">View Burndown Chart</a></li>
                     <li><a href="/login">Logout</a></li>
                 </c:when>
+
                 <c:otherwise>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Effort List</a></li>
+                    <li><a href="/effortList">Effort List</a></li>
                     <li><a href="/login">Logout</a></li>
                 </c:otherwise>
             </c:choose>

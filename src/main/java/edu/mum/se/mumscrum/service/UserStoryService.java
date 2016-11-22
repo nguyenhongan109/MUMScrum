@@ -17,4 +17,5 @@ public interface UserStoryService {
     List<Userstory> findBySidIsNull();
     void save(Userstory userstory);
     void delete(int id);
+    List<Userstory> findByEmployee(int eid);
 }

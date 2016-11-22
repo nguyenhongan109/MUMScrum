@@ -1,14 +1,12 @@
 package edu.mum.se.mumscrum.service;
 
-import edu.mum.se.mumscrum.model.AssignUSDev;
+import org.springframework.stereotype.Service;
+import edu.mum.se.mumscrum.model.Timelogs;
 import edu.mum.se.mumscrum.model.Userstory;
+import edu.mum.se.mumscrum.repository.TimelogsRepository;
 import edu.mum.se.mumscrum.repository.UserStoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -16,10 +14,9 @@ import java.util.List;
  */
 @Service("userStoryService")
 public class UserStoryServiceImpl implements UserStoryService {
-    @PersistenceContext
-    private EntityManager em;
     @Autowired
     private UserStoryRepository userStoryRepository;
+
 
     @Override
     public List<Userstory> getAllUserStory()
@@ -58,4 +55,10 @@ public class UserStoryServiceImpl implements UserStoryService {
     {
         userStoryRepository.deleteByUid(id);
     }
+
+    @Override
+    public List<Userstory> findByEmployee(int eid) { return userStoryRepository.findByEid(eid); }
+
+
+
 }

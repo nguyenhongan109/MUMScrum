@@ -15,5 +15,4 @@ public interface EmployeeService {
     List<Employee> findByRole(String Role);
     void save(Employee employee);
     void delete(int id);
-    List<Employee> findByRole(String role);
 }
