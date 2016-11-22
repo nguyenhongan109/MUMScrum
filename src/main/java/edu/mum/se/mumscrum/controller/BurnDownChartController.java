@@ -7,9 +7,12 @@ package edu.mum.se.mumscrum.controller;
 
 
 import edu.mum.se.mumscrum.model.Employee;
+import edu.mum.se.mumscrum.service.BurnDownChartService;
 import edu.mum.se.mumscrum.service.EmployeeService;
+import edu.mum.se.mumscrum.service.UserStoryService;
 import edu.mum.se.mumscrum.utilities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,8 +33,21 @@ import java.util.Map;
 public class BurnDownChartController {
 
 
+    @Autowired
+    UserStoryService usService;
+
+    @Autowired
+    BurnDownChartService bdcService;
+
+
+
+
+
     @RequestMapping(value = "/bdc", method = RequestMethod.GET)
-    public String bdc(Model model) {
+    public String bdc(@Param("sid") int sid , Model model) {
+
+
+        model.addAttribute("bdc", bdcService.getBurnDownData(sid));
         return "BurnDownChart";
     }
 
