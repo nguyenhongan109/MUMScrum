@@ -58,9 +58,4 @@ public class EmployeeServiceImpl implements EmployeeService {
     {
         employeeRepository.deleteByEid(id);
     }
-
-    @Override
-    public List<Employee> findByRole(String role) {
-        return employeeRepository.findByRole(role);
-    }
 }
