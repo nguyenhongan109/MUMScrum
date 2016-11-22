@@ -1,4 +1,5 @@
 <%@ include file="/WEB-INF/jsp/common/taglib.jsp" %>
+
 <div class="col-lg-6 col-lg-offset-3">
     <div class="well">
         <div class="container">
@@ -12,11 +13,11 @@
                             <strong class="error">${message}</strong>
                         </div>
                     </c:if>
-                    <form:form id="myForm" method="post" action="/userstory"
-                               class="bs-example form-horizontal" commandName="userstory">
+                    <form:form id="myForm" method="post" action="/sprint"
+                               class="bs-example form-horizontal" commandName="sprint">
                         <fieldset>
-                            <legend>UserStory Form</legend>
-                            <form:hidden path="uid"/>
+                            <legend>Sprint Form</legend>
+                            <form:hidden path="sid"/>
                             <div class="form-group">
                                 <label for="nameInput" class="col-lg-3 control-label">Name</label>
                                 <div class="col-lg-9">
@@ -35,49 +36,45 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label for="assignedDateInput" class="col-lg-3 control-label">Assign Date</label>
+                                <div class="col-lg-9">
+                                    <form:input type="date" class="form-control" path="assignedDate"
+                                                cssClass="date-picker"
+                                                id="assignedDateInput"/>
+                                    <form:errors path="assignedDate" cssClass="error"/>
+                                </div>
+                            </div>
 
                             <div class="form-group">
-                                <label class="col-lg-3 control-label" for="pid">Product BackLog:</label>
+                                <label for="startDateInput" class="col-lg-3 control-label">Start Date</label>
                                 <div class="col-lg-9">
-                                    <form:select path="pid" id="PFilter" cssClass="form-control" >
-                                        <form:option value="0" label="--- Select ---"/>
-                                        <form:options items="${productBackLogs}" itemLabel="name" itemValue="pid"/>
-                                    </form:select>
-                                    <form:errors path="pid" cssClass="error"/>
+                                    <form:input type="date" class="form-control" path="startDate" cssClass="date-picker"
+                                                id="startDateInput"/>
+                                    <form:errors path="startDate" cssClass="error"/>
                                 </div>
                             </div>
-                            <input id="relId" name="relId" type="hidden" value="${userstory.rid}" />
-                            <div class="form-group">
-                                <label class="control-label col-lg-3" for="rid">Release:</label>
-                                <div class="col-lg-9">
-                                    <form:select id="releaseFilter" path="rid" cssClass="form-control">
-                                        <form:options items="${releases}" itemLabel="name" itemValue="rid"/>
-                                    </form:select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="status" class="col-lg-3 control-label">Status</label>
-                                <div class="col-lg-9">
-                                    <form:select path="status">
-                                        <form:options items="${statuslists}"/>
-                                    </form:select>
-                                    <form:errors path="status" cssClass="error"/>
-                                </div>
-                            </div>
-                            <form:hidden path="sid"/>
-                            <form:hidden path="eid"/>
-                            <form:hidden path="actualEffort"/>
-                            <form:hidden path="completDate"/>
-                            <form:hidden path="assignedDate"/>
 
+                            <div class="form-group">
+                                <label for="endDateInput" class="col-lg-3 control-label">End Date</label>
+                                <div class="col-lg-9">
+                                    <form:input type="date" class="form-control" path="endDate" cssClass="date-picker"
+                                                id="endDateInput"/>
+                                    <form:errors path="endDate" cssClass="error"/>
+                                </div>
+                            </div>
+
+                            <form:hidden path="status"/>
+                            <form:hidden path="createdBy" value="${sessionScope.employee.eid}"/>
                             <input id="prodId" name="prodId" type="hidden" value="" />
 
-
                             <div class="col-lg-9 col-lg-offset-3">
-                                <button type="reset" class="btn btn-default" onclick="location.href='/userstorylist'"  formnovalidate>Cancel</button>
+                                <button type="reset" class="btn btn-default" onclick="location.href='/sprintlist'"
+                                        formnovalidate>Cancel
+                                </button>
 
                                 <c:choose>
-                                    <c:when test="${userstory.uid != 0}">
+                                    <c:when test="${sprint.sid != 0}">
                                         <button class="btn btn-primary" data-toggle="modal"
                                                 data-target="#themodal">Update
                                         </button>
@@ -95,7 +92,7 @@
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-hidden="true">&times;</button>
-                                                <h3>User Story Form Submission</h3>
+                                                <h3>Sprint Form Submission</h3>
                                             </div>
                                             <div class="modal-body">
                                                 <p>Are you sure you want to do this?</p>
@@ -122,54 +119,5 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
-       UpdateRelease();
-        $('#PFilter').change(function()
-        {
-            UpdateRelease();
-        });
 
-        function UpdateRelease()
-        {
-            $("#prodId").val($('#PFilter').val());
-            var prodId = $("#prodId").val();
-            console.log("Pid: "+prodId);
-            var relId=$("#relId").val();
-            console.log("Rid:"+relId);
-
-            var data = {
-                "prodId" : prodId
-            };
-
-            var url = "<c:url value='/releasebyproduct/'/>";
-            $.ajax({
-                type : "GET",
-                contentType : "application/json",
-                url : url + prodId,
-                data : JSON.stringify(data),
-                success : function(data) {
-                    var html = '<option value="">--- Select ---</option>';
-                    var len = data.length;
-                    for ( var i = 0; i < len; i++) {
-                        console.log(data[i].name);
-                        console.log(data[i].rid);
-                        html += '<option value="' + data[i].rid + '">'
-                                + data[i].name + '</option>';
-                    }
-                    html += '</option>';
-
-                    $('#releaseFilter').html(html);
-                    $('#releaseFilter').val(relId);
-                },
-                error : function(xhr, status, exception) {
-                    console.log(xhr, status, exception);
-                },
-                done : function(e) {
-                    console.log("DONE");
-                }
-            });
-        }
-    });
-</script>
 

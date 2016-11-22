@@ -42,6 +42,15 @@ public class Timelogs {
     public void setUid(int uid) {
         this.uid = uid;
     }
+    @Basic
+    @Column(name = "sid")
+    public Integer Sid() {
+        return sid;
+    }
+
+    public void setSid(int sid) {
+        this.sid = sid;
+    }
 
     @Basic
     @Column(name = "sid")

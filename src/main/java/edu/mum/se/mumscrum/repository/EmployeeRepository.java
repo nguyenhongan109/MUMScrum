@@ -14,6 +14,7 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Employee findByEmail(String email);
     Employee findByEid(int eid);
+    List<Employee> findByRole(String Role);
     @Transactional
     Long deleteByEid(int eid);
     List<Employee> findByRole(String role);

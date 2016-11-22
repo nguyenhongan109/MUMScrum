@@ -17,6 +17,7 @@ public class Sprint {
     private String status;
     private Date assignedDate;
     private int assignedTo;
+    private int createdBy;
 
     @Id
     @Column(name = "sid")
@@ -27,7 +28,6 @@ public class Sprint {
     public void setSid(int sid) {
         this.sid = sid;
     }
-
 
     @Basic
     @Column(name = "name")
@@ -99,6 +99,15 @@ public class Sprint {
         this.assignedTo = assignedTo;
     }
 
+    @Basic
+    @Column(name = "createdBy")
+    public int getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(int createdBy) {
+        this.createdBy = createdBy;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

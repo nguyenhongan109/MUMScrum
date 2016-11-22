@@ -1,5 +1,6 @@
 package edu.mum.se.mumscrum.controller;
 
+import edu.mum.se.mumscrum.HRSubystem.HRSubsystemFacade;
 import edu.mum.se.mumscrum.model.Employee;
 import edu.mum.se.mumscrum.service.EmployeeService;
 import edu.mum.se.mumscrum.utilities.Role;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.EnumSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -25,10 +25,9 @@ import java.util.Map;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private HRSubsystemFacade hrSubsystemFacade;
 
-
-    private void roles(Model model) {
+    private void getRoles(Model model) {
         Map<String, String> roleH = new LinkedHashMap<String, String>();
         for (Role role : EnumSet.allOf(Role.class)) {
             roleH.put(role.name(), role.desc());
@@ -38,7 +37,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String employeeList(Model model) {
-        model.addAttribute("employees", employeeService.getAllEmployee());
+        model.addAttribute("employees", hrSubsystemFacade.getAllEmployee());
         return "admin";
     }
 
@@ -47,16 +46,15 @@ public class EmployeeController {
     public String employeeUpdate(@PathVariable("id") int id, Model model) {
 
         Employee employee = new Employee();
-        roles(model);
-        employee = employeeService.findByID(id);
+        getRoles(model);
+        employee = hrSubsystemFacade.findByID(id);
         model.addAttribute("employee", employee);
         return "employee";
     }
 
     @RequestMapping(value = "/employee", method = RequestMethod.GET)
     public String employeePage(Employee employee,Model model) {
-
-        roles(model);
+        getRoles(model);
         model.addAttribute("employee", employee);
         return "employee";
     }
@@ -65,30 +63,33 @@ public class EmployeeController {
     @RequestMapping(value = "/employee", method = RequestMethod.POST)
     public String saveOrUpdateEmployee(@ModelAttribute("employee") @Validated Employee employee, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            roles(model);
+            getRoles(model);
             return "employee";
         }else{
             //update
            if(employee.getEid()!=0) {
-                employeeService.save(employee);
+                hrSubsystemFacade.save(employee);
                return "redirect:/admin";
            }
-            else if (employeeService.findByEmail(employee.getEmail())){
+            else if (checkDuplicate(employee)){
                model.addAttribute("message", "Employee already exists. Try again");
-               roles(model);
+               getRoles(model);
                return "employee";
            }
-            employeeService.save(employee);
+            hrSubsystemFacade.save(employee);
             return "redirect:/admin";
         }
+    }
 
-
+    public boolean checkDuplicate(Employee employee)
+    {
+        return (hrSubsystemFacade.findByEmail(employee.getEmail()));
     }
 
     //Delete
     @RequestMapping(value = " employee/{id}/delete", method = RequestMethod.GET)
     public String delete(@PathVariable("id") int id){
-        employeeService.delete(id);
-        return "redirect:/employeelist";
+        hrSubsystemFacade.delete(id);
+        return "redirect:/admin";
     }
 }

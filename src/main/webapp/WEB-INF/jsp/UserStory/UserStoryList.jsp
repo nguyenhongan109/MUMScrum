@@ -2,14 +2,6 @@
 <%@ include file="/WEB-INF/jsp/common/taglib.jsp" %>
 
 <div class="container">
-    <c:if test="${not empty message}">
-        <div class="alert alert-${css} alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>${message}</strong>
-        </div>
-    </c:if>
     <h1>All User Stories</h1>
     <c:out value="${session.employee.role}"></c:out>
     <table class="table table-striped">
