@@ -44,6 +44,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         else
             return null;
     }
+    @Override
+    public List<Employee> findByRole(String Role)
+    {
+        return employeeRepository.findByRole(Role);
+    }
 
     public void save(Employee employee) {
         employeeRepository.save(employee);

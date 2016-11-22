@@ -36,6 +36,11 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/HRAdmin/Employee.jsp" />
 	</definition>
 
+	<definition name="ProductOwner" extends="baseLayout">
+		<put-attribute name="menu" value="/WEB-INF/jsp/common/menu.jsp"/>
+		<put-attribute name="head" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/common/ProductOwnerHome.jsp" />
+	</definition>
 
 <!-- User Story-->
 	<definition name="userstorylist" extends="baseLayout">
@@ -87,5 +92,37 @@
 		<put-attribute name="head" value="" />
 		<put-attribute name="body" value="/WEB-INF/jsp/BurnDownChart.jsp" />
 	</definition>
+	<definition name="AssignSprintList" extends="baseLayout">
+		<put-attribute name="head" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/AssignSprint/AssignSprintList.jsp" />
+	</definition>
+	<definition name="AssignSprint" extends="baseLayout">
+		<put-attribute name="head" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/AssignSprint/AssignSprint.jsp" />
+	</definition>
+	<definition name="AssignDevList" extends="baseLayout">
+		<put-attribute name="head" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/AssignDev/AssignUstoDevList.jsp" />
+	</definition>
+	<definition name="assignUStoDev" extends="baseLayout">
+		<put-attribute name="head" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/AssignDev/AssignUstoDev.jsp" />
+	</definition>
+	<definition name="sprint" extends="baseLayout">
+		<put-attribute name="head" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/Sprint/Sprint.jsp" />
+	</definition>
 
+	<definition name="assignPBL" extends="baseLayout">
+		<put-attribute name="head" value="" />
+        <put-attribute name="body" value="/WEB-INF/jsp/productOwner/assignPBL.jsp"/>
+    </definition>
+    <definition name="assignPB" extends="baseLayout">
+		<put-attribute name="head" value="" />
+        <put-attribute name="body" value="/WEB-INF/jsp/productOwner/assignPBForm.jsp"/>
+    </definition>
+	<definition name="sprintlist" extends="baseLayout">
+		<put-attribute name="head" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/Sprint/SprintList.jsp" />
+	</definition>
 </tiles-definitions>

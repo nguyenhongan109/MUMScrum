@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Min Gaung on 11/11/2016.
  */
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Employee findByEmail(String email);
     Employee findByEid(int eid);
+    List<Employee> findByRole(String Role);
     @Transactional
     Long deleteByEid(int eid);
 }

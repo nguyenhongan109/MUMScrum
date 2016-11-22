@@ -14,6 +14,8 @@ public class ProductBackLog {
     private String name;
     private String description;
     private String status;
+    private String assignedTo;
+
 
     @Id
     @Column(name = "pid")
@@ -24,6 +26,18 @@ public class ProductBackLog {
     public void setPid(int pid) {
         this.pid = pid;
     }
+
+
+    @Basic
+    @Column(name = "assignedTo")
+    public String getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(String SM) {
+        this.assignedTo = SM;
+    }
+
 
     @Basic
     @Column(name = "name")

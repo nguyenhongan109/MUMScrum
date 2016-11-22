@@ -1,15 +1,10 @@
 package edu.mum.se.mumscrum.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.sql.Date;
-import java.util.Calendar;
 
 /**
- * Created by Min Gaung on 16/11/2016.
+ * Created by Min Gaung on 22/11/2016.
  */
 @Entity
 @Table(name="userstory")
@@ -18,12 +13,8 @@ public class Userstory {
     private Integer sid;
     private int pid;
     private int rid;
-    private int eid;
-    @NotEmpty
-    @Size(min=4, max=100)
+    private Integer eid;
     private String name;
-    @NotEmpty
-    @Size(min=4, max=256)
     private String description;
     private Integer estimatedEffort;
     private Integer actualEffort;
@@ -33,8 +24,8 @@ public class Userstory {
 
     public Userstory()
     {
-        assignedDate=new java.sql.Date(Calendar.getInstance().getTimeInMillis());
         completDate=new Date(0,0,0);
+        assignedDate=new Date(0,0,0);
     }
     @Id
     @Column(name = "uid")
@@ -78,11 +69,11 @@ public class Userstory {
 
     @Basic
     @Column(name = "eid")
-    public int getEid() {
+    public Integer getEid() {
         return eid;
     }
 
-    public void setEid(int eid) {
+    public void setEid(Integer eid) {
         this.eid = eid;
     }
 
@@ -127,7 +118,7 @@ public class Userstory {
     }
 
     @Basic
-    @Column(name = "completDate", nullable=true)
+    @Column(name = "completDate")
     public Date getCompletDate() {
         return completDate;
     }
@@ -153,10 +144,15 @@ public class Userstory {
     }
 
     public void setAssignedDate(Date assignedDate) {
-        this.assignedDate =assignedDate;
-
+        this.assignedDate = assignedDate;
     }
 
+    public Date ComDate()
+    {
+        Date st=new Date(0,0,0);
+        if(getCompletDate().equals(st)) return null;
+        else return getCompletDate();
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -167,8 +163,8 @@ public class Userstory {
         if (uid != userstory.uid) return false;
         if (pid != userstory.pid) return false;
         if (rid != userstory.rid) return false;
-        if (eid != userstory.eid) return false;
         if (sid != null ? !sid.equals(userstory.sid) : userstory.sid != null) return false;
+        if (eid != null ? !eid.equals(userstory.eid) : userstory.eid != null) return false;
         if (name != null ? !name.equals(userstory.name) : userstory.name != null) return false;
         if (description != null ? !description.equals(userstory.description) : userstory.description != null)
             return false;
@@ -191,7 +187,7 @@ public class Userstory {
         result = 31 * result + (sid != null ? sid.hashCode() : 0);
         result = 31 * result + pid;
         result = 31 * result + rid;
-        result = 31 * result + eid;
+        result = 31 * result + (eid != null ? eid.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (estimatedEffort != null ? estimatedEffort.hashCode() : 0);
@@ -200,11 +196,5 @@ public class Userstory {
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (assignedDate != null ? assignedDate.hashCode() : 0);
         return result;
-    }
-    public Date ComDate()
-    {
-        if(this.getCompletDate().equals(new java.sql.Date(0,0,0)))
-            return null;
-        else return this.completDate;
     }
 }

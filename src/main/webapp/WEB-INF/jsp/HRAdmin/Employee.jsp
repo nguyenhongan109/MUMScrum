@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <c:if test="${not empty message}">
-                        < cssClass="error">${message}</>
+                        <div Class="message error">${message}</div>
                     </c:if>
                     <spring:url value="/employee" var="ActionUrl"/>
                     <form:form id="myForm" method="post" action="${ActionUrl}"

@@ -2,6 +2,7 @@ package edu.mum.se.mumscrum.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Time;
 
 /**
  * Created by Min Gaung on 14/11/2016.
@@ -11,8 +12,16 @@ import java.sql.Date;
 public class Timelogs {
     private int tid;
     private int uid;
+    private int sid;
     private Integer duration;
+    private int todayEffort;
     private Date updatedDate;
+
+    public Timelogs(){}
+    public Timelogs(int uid, Integer duration){
+        this.uid = uid;
+        this.duration = duration;
+    }
 
     @Id
     @Column(name = "tid")
@@ -26,14 +35,36 @@ public class Timelogs {
 
     @Basic
     @Column(name = "uid")
-    public Integer Uid() {
+    public int getUid() {
         return uid;
     }
 
     public void setUid(int uid) {
         this.uid = uid;
     }
+    @Basic
+    @Column(name = "sid")
+    public Integer Sid() {
+        return sid;
+    }
 
+    public void setSid(int sid) {
+        this.sid = sid;
+    }
+
+    @Basic
+    @Column(name = "sid")
+    public int getSid() {
+        return sid;
+    }
+
+    @Basic
+    @Column(name = "todayEffort")
+    public int getTodayEffort() { return todayEffort;}
+
+    public void setTodayEffort(int todayEffort) {
+        this.todayEffort = todayEffort;
+    }
     @Basic
     @Column(name = "duration")
     public Integer getDuration() {
@@ -77,3 +108,5 @@ public class Timelogs {
         return result;
     }
 }
+
+

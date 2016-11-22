@@ -1,5 +1,6 @@
 package edu.mum.se.mumscrum.service;
 
+import edu.mum.se.mumscrum.model.AssignUSDev;
 import edu.mum.se.mumscrum.model.Userstory;
 
 import java.util.List;
@@ -12,6 +13,9 @@ public interface UserStoryService {
     Userstory findByName(String name);
     boolean checkByName(String name);
     Userstory findByID(int id);
+    List<Userstory> findBySid(int sid);
+    List<Userstory> findBySidIsNull();
     void save(Userstory userstory);
     void delete(int id);
+    List<Userstory> findByEmployee(int eid);
 }

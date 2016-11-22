@@ -1,5 +1,6 @@
 package edu.mum.se.mumscrum.controller;
 
+import edu.mum.se.mumscrum.HRSubystem.HRSubsystemFacade;
 import edu.mum.se.mumscrum.model.Employee;
 import edu.mum.se.mumscrum.model.EmployeeLogin;
 import edu.mum.se.mumscrum.service.EmployeeService;
@@ -24,7 +25,7 @@ public class LoginController {
 
 
     @Autowired
-    private EmployeeService employeeService;
+    private HRSubsystemFacade hrSubsystemFacade;
 
    @RequestMapping(value="/login", method= RequestMethod.GET)
     public String loginPage(Model model,HttpSession session) {
@@ -39,7 +40,7 @@ public class LoginController {
         if (result.hasErrors()) {
             return "login";
         } else {
-            Employee employee = employeeService.findByLogin(employeeLogin.getEmail(),employeeLogin.getPassword());
+            Employee employee = hrSubsystemFacade.findByLogin(employeeLogin.getEmail(),employeeLogin.getPassword());
             if (employee!=null) {
                 session.removeAttribute("employee");
                 session.setAttribute("employee",employee);
@@ -48,13 +49,20 @@ public class LoginController {
                     return "redirect:/admin";
                 else if(Role.POWNER.name().equals(employee.getRole()))
                     return "redirect:/userstorylist";
+                else if(Role.SCRUMASTER.name().equals(employee.getRole()))
+                    return "redirect:/AssignSprintList";
                 else
-                    return "redirect:/effortlist";
+                    return "redirect:/effortList";
             } else {
                 return "failure";
             }
         }
 
+    }
+
+    @RequestMapping(value = "/ProductOwner", method = RequestMethod.GET)
+    public String employeeList(Model model) {
+       return "ProductOwner";
     }
 
 }

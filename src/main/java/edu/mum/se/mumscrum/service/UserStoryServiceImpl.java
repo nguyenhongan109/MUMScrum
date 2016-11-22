@@ -1,10 +1,12 @@
 package edu.mum.se.mumscrum.service;
 
+import org.springframework.stereotype.Service;
+import edu.mum.se.mumscrum.model.Timelogs;
 import edu.mum.se.mumscrum.model.Userstory;
+import edu.mum.se.mumscrum.repository.TimelogsRepository;
 import edu.mum.se.mumscrum.repository.UserStoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
@@ -12,9 +14,9 @@ import java.util.List;
  */
 @Service("userStoryService")
 public class UserStoryServiceImpl implements UserStoryService {
-
     @Autowired
     private UserStoryRepository userStoryRepository;
+
 
     @Override
     public List<Userstory> getAllUserStory()
@@ -35,6 +37,16 @@ public class UserStoryServiceImpl implements UserStoryService {
             return true;
         return false;
     }
+    @Override
+    public List<Userstory> findBySid(int sid){
+        return userStoryRepository.findBySid(sid);
+    }
+    @Override
+    public List<Userstory> findBySidIsNull()
+    {
+        return userStoryRepository.findBySidIsNull();
+    }
+
     public void save(Userstory userstory) {
         userStoryRepository.save(userstory);
     }
@@ -43,4 +55,10 @@ public class UserStoryServiceImpl implements UserStoryService {
     {
         userStoryRepository.deleteByUid(id);
     }
+
+    @Override
+    public List<Userstory> findByEmployee(int eid) { return userStoryRepository.findByEid(eid); }
+
+
+
 }

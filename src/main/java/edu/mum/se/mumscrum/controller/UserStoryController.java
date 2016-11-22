@@ -8,20 +8,15 @@ import edu.mum.se.mumscrum.service.ReleaseService;
 import edu.mum.se.mumscrum.service.UserStoryService;
 import edu.mum.se.mumscrum.utilities.Status;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Date;
 
 /**
  * Created by Min Gaung on 12/11/2016.
@@ -97,8 +92,7 @@ public class UserStoryController {
     //Delete
     @RequestMapping(value = " userstorydelete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable("id") int id){
-        Userstory userstory=userStoryService.findByID(id);
-        userstory.setStatus("Deleted");
+        userStoryService.delete(id);
         return "redirect:/userstorylist";
     }
 

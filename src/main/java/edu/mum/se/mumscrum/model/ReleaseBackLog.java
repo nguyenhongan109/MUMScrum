@@ -6,14 +6,14 @@ import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * Created by Min Gaung on 14/11/2016.
+ * Created by Min Gaung on 22/11/2016.
  */
 @Entity
 @Table(name="releaseBackLog")
 public class ReleaseBackLog {
     private int rid;
-    private int uid;
     private int pid;
+    private Integer uid;
     private String name;
     private String description;
     private Date releaseDate;
@@ -85,14 +85,14 @@ public class ReleaseBackLog {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ReleaseBackLog release = (ReleaseBackLog) o;
+        ReleaseBackLog that = (ReleaseBackLog) o;
 
-        if (rid != release.rid) return false;
-        if (uid != release.uid) return false;
-        if (pid != release.pid) return false;
-        if (name != null ? !name.equals(release.name) : release.name != null) return false;
-        if (description != null ? !description.equals(release.description) : release.description != null) return false;
-        if (releaseDate != null ? !releaseDate.equals(release.releaseDate) : release.releaseDate != null) return false;
+        if (rid != that.rid) return false;
+        if (pid != that.pid) return false;
+        if (uid != null ? !uid.equals(that.uid) : that.uid != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (releaseDate != null ? !releaseDate.equals(that.releaseDate) : that.releaseDate != null) return false;
 
         return true;
     }
@@ -100,8 +100,8 @@ public class ReleaseBackLog {
     @Override
     public int hashCode() {
         int result = rid;
-        result = 31 * result + uid;
         result = 31 * result + pid;
+        result = 31 * result + (uid != null ? uid.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (releaseDate != null ? releaseDate.hashCode() : 0);

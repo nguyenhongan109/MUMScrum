@@ -12,6 +12,7 @@ public interface EmployeeService {
     boolean findByEmail(String email);
     List<Employee> getAllEmployee();
     Employee findByID(int id);
+    List<Employee> findByRole(String Role);
     void save(Employee employee);
     void delete(int id);
 }
