@@ -5,9 +5,11 @@
   Time: 11:33 PM
   To change this template use File | Settings | File Templates.
 --%>
-test
+
 <%@ include file="/WEB-INF/jsp/common/taglib.jsp" %>
 <div class="container">
+    <h1>Effort List</h1>
+    This belongs to ${sessionScope.employee.firstName} ${sessionScope.employee.lastName}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -15,20 +17,31 @@ test
             <th>Task name</th>
             <th>Description</th>
             <th>Estimate Effort</th>
+            <th>Actual Effort</th>
+            <%--<th>Status</th>--%>
             <th></th>
-        </tr>
+            <th></th>
         </thead>
 
         <c:forEach var="task" items="${USList}">
             <tr>
-                <td>${task.getUid()}</td>
-                <td>${task.getName()}</td>
-                <td>${task.getDescription()}</td>
-                <td>${task.getEstimatedEffort()}</td>
-
+                <td>${task.uid}</td>
+                <td>${task.name}</td>
+                <td>${task.description}</td>
+                <td>${task.estimatedEffort}</td>
+                <td>${task.actualEffort}</td>
+                <%--<td>${task.status}</td>--%>
+                <%--<td>--%>
+                    <%--<c:if test="${task.status == 1}">--%>
+                        <%--Processing--%>
+                    <%--</c:if>--%>
+                    <%--<c:if test="${task.status == 2}">--%>
+                    <%--Complete--%>
+                    <%--</c:if>--%>
+                <%--<td>--%>
                 <td>
                     <spring:url value="/estimateEffort/${task.uid}" var="taskUrl"/>
-                    <c:if test="${empty task.getEstimatedEffort() || task.getEstimatedEffort() == 0 }">
+                    <c:if test="${empty task.estimatedEffort || task.estimatedEffort == 0 }">
                         <button class="btn btn-info"
                                 onclick="location.href='${taskUrl}'">Estimate
                         </button>
@@ -37,7 +50,7 @@ test
 
                 <td>
                     <spring:url value="/updateEffort/${task.uid}" var="taskUrl"/>
-                    <c:if test="${not empty task.getEstimatedEffort() || task.getEstimatedEffort() != 0 }">
+                    <c:if test="${not empty task.estimatedEffort || task.estimatedEffort != 0 }">
                         <button class="btn btn-info"
                                 onclick="location.href='${taskUrl}'">Update
                         </button>

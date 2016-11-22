@@ -1,9 +1,10 @@
 package edu.mum.se.mumscrum.service;
 
+import edu.mum.se.mumscrum.model.Timelogs;
 import edu.mum.se.mumscrum.model.Userstory;
 
 import java.util.List;
-
+import java.util.Date;
 /**
  * Created by Min Gaung on 11/11/2016.
  */
@@ -14,4 +15,6 @@ public interface UserStoryService {
     Userstory findByID(int id);
     void save(Userstory userstory);
     void delete(int id);
+    List<Userstory> findByEmployee(int eid);
+
 }
