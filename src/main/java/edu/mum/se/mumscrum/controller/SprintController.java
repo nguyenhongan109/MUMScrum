@@ -1,5 +1,6 @@
 package edu.mum.se.mumscrum.controller;
 
+import edu.mum.se.mumscrum.model.Employee;
 import edu.mum.se.mumscrum.model.ProductBackLog;
 import edu.mum.se.mumscrum.model.Sprint;
 import edu.mum.se.mumscrum.model.Userstory;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -28,8 +30,9 @@ public class SprintController {
     @Autowired
     private SprintService sprintService;
     @RequestMapping(value = "/sprintlist", method = RequestMethod.GET)
-    public String userStoryList(Model model) {
-        model.addAttribute("sprints", sprintService.getAllSprint());
+    public String userStoryList(Model model, HttpSession session) {
+        Employee employee=(Employee)session.getAttribute("employee");
+        model.addAttribute("sprints", sprintService.findByCreatedBy(employee.getEid()));
         return "sprintlist";
     }
 

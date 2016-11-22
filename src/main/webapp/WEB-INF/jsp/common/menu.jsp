@@ -5,11 +5,6 @@
     <div class="navbar-header">
         <a class="navbar-brand"><span style="font-weight: bold;">MUMScrum System</span>
             | <span style="font-size: medium"> ${Role.valueOf(sessionScope.employee.role).desc()} </span></a>
-        <button type="button" class="navbar-toggle" data-toggle="collapse"
-                data-target=".navbar-responsive-collapse">
-            <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                class="icon-bar"></span>
-        </button>
     </div>
 
     <div class="navbar-header">
