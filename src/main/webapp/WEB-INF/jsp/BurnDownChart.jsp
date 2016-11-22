@@ -7,7 +7,27 @@
 --%>
 <%@ include file="/WEB-INF/jsp/common/taglib.jsp" %>
 <div class="container">
-    <!-- Styles -->
+
+<c:if test="${bdc != null }">
+
+    <c:if test="${bdc.onTime}">
+        <div class="alert alert-success">
+            OK : This sprint is  on Time !!!
+            The dead line for this sprint is day number : ${bdc.deadLine}
+        </div>
+    </c:if>
+
+    <c:if test="${! bdc.onTime}">
+        <div class="alert alert-danger">
+            Attention : This sprint is not on Time !!!
+            The dead line for this sprint is Day number : ${bdc.deadLine}
+        </div>
+    </c:if>
+
+
+
+
+<!-- Styles -->
     <style>
         #chartdiv {
             width: 100%;
@@ -38,10 +58,54 @@
                 "horizontalPadding": 10,
                 "verticalPadding": 8,
                 "color": "#ffffff"
-            },
+            } ,           "dataProvider":
 
-            "dataProvider": [ {
-                "day": 1,
+                    [
+                        <c:forEach items="${bdc.bars}" var="entry">
+                        {
+
+                            <c:if test="${(bdc.firstKey == entry.key) }">
+                            "expenses": ${entry.value},
+                            </c:if>
+                            "day": ${entry.key},
+                            "income": ${entry.value}
+                        },
+                        </c:forEach>
+
+
+
+                        <c:if test="${bdc.lastKey != -1 &&  bdc.projected != -1 }">
+                        <c:if test="${bdc.lastKey != bdc.projected }">
+
+                        <c:forEach begin="${bdc.lastKey + 1}" end="${bdc.projected - 1}" varStatus="loop">
+                        {
+                            "day": ${loop.index},
+                            "income": 0
+                        },
+                        </c:forEach>
+
+                        {
+                            "day": ${bdc.projected},
+                            "expenses": 0
+                        },
+
+
+                        </c:if>
+                        </c:if>
+
+
+                    ]
+
+
+
+
+
+
+
+
+
+            /*[ {
+
                 "income": 50
             }, {
                 "day": 2,
@@ -67,7 +131,7 @@
                 "dashLengthColumn": 5,
                 "alpha": 0.2,
                 "additional": "(projection)"
-            } ],
+            } ]*/,
             "valueAxes": [ {
                 "axisAlpha": 0,
                 "position": "left"
@@ -127,4 +191,5 @@
 
     <!-- HTML -->
     <div id="chartdiv"></div>
+</c:if>
 </div>
